@@ -51,6 +51,8 @@ import BusinessCard from './BusinessCard';
 import UpgradeCard from './UpgradeCard';
 import PrestigePanel from './PrestigePanel';
 import AchievementCard from './AchievementCard';
+import BannerAd from './BannerAd';
+import RewardedAdOverlay from './RewardedAdOverlay';
 
 // ---- Buy amount options ----
 const BUY_AMOUNTS: BuyAmount[] = [1, 10, 25, 100, 'max'];
@@ -64,6 +66,7 @@ export default function GameScreen() {
   const [showDailyModal, setShowDailyModal] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showStats, setShowStats] = useState(false);
+  const [showRewardedAd, setShowRewardedAd] = useState(false);
   const [achievementToast, setAchievementToast] = useState<string | null>(null);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -171,17 +174,12 @@ export default function GameScreen() {
   }, [state.claimDaily]);
 
   const handleBoost = useCallback(() => {
-    // In production, this shows a rewarded video ad
-    if (Platform.OS === 'web') {
-      if (window.confirm('Watch a short ad for 2× boost? (simulated)')) {
-        state.activateBoost();
-      }
-    } else {
-      Alert.alert('Watch Ad', 'Watch a short ad for 2h 2× boost?', [
-        { text: 'Cancel', style: 'cancel' },
-        { text: 'Watch', onPress: () => state.activateBoost() },
-      ]);
-    }
+    // Open the rewarded ad overlay (real ad + timer)
+    setShowRewardedAd(true);
+  }, []);
+
+  const handleRewardEarned = useCallback(() => {
+    state.activateBoost();
   }, [state.activateBoost]);
 
   const handleReset = useCallback(() => {
@@ -336,6 +334,9 @@ export default function GameScreen() {
           {activeTab === 'prestige' && <PrestigePanel />}
           {activeTab === 'achievements' && renderAchievementPanel()}
         </ScrollView>
+
+        {/* Banner Ad at bottom of game area */}
+        <BannerAd />
       </View>
 
       {/* Achievement Toast */}
@@ -475,6 +476,13 @@ export default function GameScreen() {
           </View>
         </View>
       </Modal>
+
+      {/* Rewarded Ad Overlay */}
+      <RewardedAdOverlay
+        visible={showRewardedAd}
+        onRewardEarned={handleRewardEarned}
+        onClose={() => setShowRewardedAd(false)}
+      />
 
     </SafeAreaView>
   );
