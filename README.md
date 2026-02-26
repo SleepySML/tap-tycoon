@@ -98,10 +98,12 @@ Use the **publishable** key in the app (safe for browser/mobile). **Secret keys*
 4. Run the query
 
 This creates:
-- `profiles` — user display names + avatars (auto-created on signup)
+- `profiles` — user display names + avatars (trigger creates on signup; app also upserts on sign-in as fallback)
 - `game_saves` — cloud save data (JSONB, one row per user)
 - `leaderboards` — public rankings (sorted by total earned)
 - Row-Level Security policies so users can only access their own data
+
+If new users don’t appear in **Table Editor → profiles**, re-run the full `schema.sql` (the trigger may be missing). The app will still create a profile row on sign-in as a fallback.
 
 ### 4. Enable Google OAuth
 1. Go to [Google Cloud Console](https://console.cloud.google.com)

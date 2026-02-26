@@ -63,6 +63,9 @@ async function handleWebOAuthCallback(
       const { data: { session }, error } = await supabase.auth.exchangeCodeForSession(code);
       if (!error && session) {
         setSession(session);
+        if (session.user && !session.user.is_anonymous) {
+          ensureProfileForUser(session.user);
+        }
       }
       if (error) {
         Alert.alert('Sign In Failed', error.message || 'Could not complete sign in.');
@@ -131,6 +134,9 @@ export function useAuthInit(): void {
       const { data: { session } } = await supabase.auth.getSession();
       if (!cancelled) {
         setSession(session);
+        if (session?.user && !session.user.is_anonymous) {
+          ensureProfileForUser(session.user);
+        }
         setInitialized();
       }
     };
@@ -141,7 +147,12 @@ export function useAuthInit(): void {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (!cancelled) setSession(session);
+      if (!cancelled) {
+        setSession(session);
+        if (session?.user && !session.user.is_anonymous) {
+          ensureProfileForUser(session.user);
+        }
+      }
     });
 
     return () => {
@@ -239,6 +250,9 @@ export function useAuthActions() {
         }
         if (data.session) {
           setSession(data.session as any);
+          if (data.user && !data.user.is_anonymous) {
+            ensureProfileForUser(data.user);
+          }
         }
         return { error: null };
       } catch (error: any) {
@@ -278,6 +292,9 @@ export function useAuthActions() {
         }
         if (data.session) {
           setSession(data.session as any);
+          if (data.user && !data.user.is_anonymous) {
+            ensureProfileForUser(data.user);
+          }
         }
         if (!data.session) {
           Alert.alert(
@@ -321,6 +338,30 @@ export function useAuthActions() {
 }
 
 // ---- Helpers ----
+
+/**
+ * Ensure the current user has a row in public.profiles (creates or updates).
+ * Called after sign-in/sign-up so the user appears in the profiles table even
+ * if the DB trigger didn't run (e.g. trigger not deployed or RLS blocked it).
+ */
+function ensureProfileForUser(user: { id: string; user_metadata?: Record<string, unknown>; email?: string | null }): void {
+  if (!isSupabaseConfigured()) return;
+  const displayName =
+    (user.user_metadata?.full_name as string) ||
+    (user.user_metadata?.name as string) ||
+    (user.email ? user.email.split('@')[0] : 'Player') ||
+    'Player';
+  const avatarUrl = (user.user_metadata?.avatar_url as string) ?? null;
+  supabase
+    .from('profiles')
+    .upsert(
+      { id: user.id, display_name: displayName, avatar_url: avatarUrl },
+      { onConflict: 'id' }
+    )
+    .then(({ error }) => {
+      if (error) console.warn('ensureProfileForUser:', error.message);
+    });
+}
 
 /**
  * Extract access/refresh tokens from the OAuth redirect URL
