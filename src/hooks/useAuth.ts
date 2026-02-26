@@ -37,10 +37,61 @@ WebBrowser.maybeCompleteAuthSession();
 const redirectTo = makeRedirectUri();
 
 /**
+ * On web: return the URL Supabase should redirect to after OAuth.
+ * Must match Redirect URLs in Supabase Dashboard → Auth → URL Configuration.
+ */
+function getWebRedirectUrl(): string {
+  if (typeof window === 'undefined') return '';
+  return window.location.origin + (window.location.pathname || '');
+}
+
+/**
+ * On web: handle OAuth callback (PKCE code exchange or hash params).
+ * Returns true if we handled the callback (code or error in URL).
+ */
+async function handleWebOAuthCallback(
+  setSession: (s: any) => void,
+  setInitialized: () => void,
+): Promise<boolean> {
+  if (typeof window === 'undefined') return false;
+
+  const search = new URLSearchParams(window.location.search);
+  const code = search.get('code');
+
+  if (code) {
+    try {
+      const { data: { session }, error } = await supabase.auth.exchangeCodeForSession(code);
+      if (!error && session) {
+        setSession(session);
+      }
+      if (error) {
+        Alert.alert('Sign In Failed', error.message || 'Could not complete sign in.');
+      }
+    } catch (err: any) {
+      Alert.alert('Sign In Failed', err?.message || 'Could not complete sign in.');
+    } finally {
+      window.history.replaceState({}, document.title, window.location.pathname || '/');
+    }
+    setInitialized();
+    return true;
+  }
+
+  const hashParams = new URLSearchParams((window.location.hash || '#').slice(1));
+  const errorDesc = hashParams.get('error_description') || hashParams.get('error');
+  if (errorDesc) {
+    Alert.alert('Sign In Failed', decodeURIComponent(errorDesc));
+    window.history.replaceState({}, document.title, window.location.pathname || '/');
+  }
+
+  return false;
+}
+
+/**
  * Initialize auth: restore session, listen for changes.
  * Call once at app root.
  *
  * When Supabase is configured: restores Supabase session, subscribes to changes.
+ * On web, handles OAuth redirect (PKCE code exchange) before getSession.
  * When not configured: initializes local auth (seeds test accounts), restores local session.
  */
 export function useAuthInit(): void {
@@ -67,20 +118,36 @@ export function useAuthInit(): void {
       return;
     }
 
-    // Supabase mode — restore existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setInitialized();
-    });
+    let cancelled = false;
+
+    const initSupabase = async () => {
+      // Web: handle OAuth callback first (PKCE code in URL)
+      if (Platform.OS === 'web') {
+        const handled = await handleWebOAuthCallback(setSession, setInitialized);
+        if (handled || cancelled) return;
+      }
+
+      if (cancelled) return;
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!cancelled) {
+        setSession(session);
+        setInitialized();
+      }
+    };
+
+    initSupabase();
 
     // Listen for auth state changes (sign in, sign out, token refresh)
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
+      if (!cancelled) setSession(session);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      cancelled = true;
+      subscription.unsubscribe();
+    };
   }, [setSession, setInitialized]);
 }
 
@@ -110,9 +177,10 @@ export function useAuthActions() {
       setLoading(true);
 
       if (Platform.OS === 'web') {
+        const redirectTo = getWebRedirectUrl() || window.location.origin;
         const { error } = await supabase.auth.signInWithOAuth({
           provider: 'google',
-          options: { redirectTo: window.location.origin },
+          options: { redirectTo },
         });
         if (error) throw error;
       } else {
@@ -162,12 +230,15 @@ export function useAuthActions() {
 
       try {
         setLoading(true);
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
         });
         if (error) {
           return { error: error.message };
+        }
+        if (data.session) {
+          setSession(data.session as any);
         }
         return { error: null };
       } catch (error: any) {
@@ -204,6 +275,9 @@ export function useAuthActions() {
         });
         if (error) {
           return { error: error.message };
+        }
+        if (data.session) {
+          setSession(data.session as any);
         }
         if (!data.session) {
           Alert.alert(

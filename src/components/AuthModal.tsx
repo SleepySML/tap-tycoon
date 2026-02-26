@@ -79,9 +79,11 @@ function AuthModal({ visible, onClose }: AuthModalProps) {
       ? await signUpWithEmail(email.trim(), password)
       : await signInWithEmail(email.trim(), password);
 
-    if (!result.error) {
-      handleClose();
+    if (result.error) {
+      setError(result.error);
+      return;
     }
+    handleClose();
   }, [email, password, isSignUp, signInWithEmail, signUpWithEmail, handleClose]);
 
   return (

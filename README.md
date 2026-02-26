@@ -79,14 +79,17 @@ GameScreen (subscribes to full state, 10 re-renders/sec)
 ### 1. Create Supabase Project
 1. Go to [supabase.com](https://supabase.com) and create a free account
 2. Create a new project (choose a region close to your users)
-3. Copy your **Project URL** and **anon key** from Settings → API
+3. In **Project Settings → API** (or the Connect dialog), copy:
+   - **Project URL** (e.g. `https://xxxx.supabase.co`)
+   - **Publishable key** (`sb_publishable_...`) — for use in the client app only
 
 ### 2. Configure Credentials
-Edit `src/config/supabase.ts` and replace the placeholders:
+Edit `src/config/supabase.ts` and set:
 ```typescript
 const SUPABASE_URL = 'https://your-project-id.supabase.co';
-const SUPABASE_ANON_KEY = 'your-anon-key-here';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_...';  // from API Keys tab
 ```
+Use the **publishable** key in the app (safe for browser/mobile). **Secret keys** (`sb_secret_...`) are for backend only (Edge Functions, servers) — never put them in client code.
 
 ### 3. Create Database Tables
 1. Go to Supabase Dashboard → SQL Editor
@@ -104,12 +107,16 @@ This creates:
 1. Go to [Google Cloud Console](https://console.cloud.google.com)
 2. Create a project → APIs & Services → Credentials
 3. Create OAuth 2.0 Client ID (Web application)
-4. Add authorized redirect URIs:
+4. Add **Authorized JavaScript origins**: your app URLs (e.g. `http://localhost:19006` for Expo web, `https://yourdomain.com` for production)
+5. Add **Authorized redirect URIs** (in Google Console):
    - `https://your-project-id.supabase.co/auth/v1/callback`
-5. Copy the Client ID and Client Secret
-6. In Supabase Dashboard → Auth → Providers → Google:
+6. Copy the Client ID and Client Secret
+7. In Supabase Dashboard → Auth → Providers → Google:
    - Enable Google provider
    - Paste Client ID and Client Secret
+8. **Redirect URLs (required for Google sign-in to work):** In Supabase Dashboard → **Authentication → URL Configuration → Redirect URLs**, add the URLs where your app runs so Supabase can redirect back after sign-in:
+   - Local: `http://localhost:19006` (Expo web default) or `http://127.0.0.1:19006`
+   - Production: `https://yourdomain.com` (or use wildcards like `https://*.vercel.app/**` for previews)
 
 ### 5. Enable Email Auth
 Email/password auth is enabled by default in Supabase. Optionally:

@@ -10,9 +10,14 @@
 //
 // Setup:
 //   1. Create project at https://supabase.com
-//   2. Replace the URL and anon key below
+//   2. Set SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY below (new API keys)
 //   3. Run the SQL schema from supabase/schema.sql
 //   4. Enable Google provider in Auth → Providers
+//   5. Add your app URLs to Auth → URL Configuration → Redirect URLs (e.g. http://localhost:19006 for web)
+//
+// API keys (new model): use publishable key in client only.
+// - Publishable key (sb_publishable_...): safe for browser/mobile; use here.
+// - Secret key (sb_secret_...): backend only (Edge Functions, servers). Never put in client code.
 // ============================================
 
 import { Platform, AppState } from 'react-native';
@@ -20,12 +25,13 @@ import 'react-native-url-polyfill/auto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { createClient } from '@supabase/supabase-js';
 
-// ⚠️ Replace these with your Supabase project credentials
-// Get them from: https://supabase.com/dashboard/project/_/settings/api
-const SUPABASE_URL = 'https://YOUR_PROJECT_ID.supabase.co';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+// From Supabase Dashboard → Project Settings → API (or Connect) → use new API keys
+// - Project URL: e.g. https://xxxx.supabase.co
+// - Publishable key: sb_publishable_... (replaces legacy anon key)
+const SUPABASE_URL = 'https://bvaxjrydahaeaxvlnbct.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'YOUR_PUBLISHABLE_KEY';
 
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
     // On mobile, use AsyncStorage; on web, use built-in localStorage
     ...(Platform.OS !== 'web' ? { storage: AsyncStorage } : {}),
@@ -53,6 +59,6 @@ if (Platform.OS !== 'web') {
 export function isSupabaseConfigured(): boolean {
   return (
     !SUPABASE_URL.includes('YOUR_PROJECT_ID') &&
-    !SUPABASE_ANON_KEY.includes('YOUR_SUPABASE_ANON_KEY')
+    Boolean(SUPABASE_PUBLISHABLE_KEY && !SUPABASE_PUBLISHABLE_KEY.includes('YOUR_PUBLISHABLE_KEY'))
   );
 }
