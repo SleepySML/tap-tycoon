@@ -33,9 +33,9 @@ export const PUBLISHER_ID = 'ca-pub-7610075308812167';
  * Replace with your real slot IDs after creating them.
  */
 export const AD_SLOTS = {
-  banner: '8888135845',
-  rewarded: '7595235477',
-  interstitial: '3456789012',
+  banner: '9201832743',
+  rewarded: '9201832743',
+  interstitial: '9201832743',
 } as const;
 
 // ---- Feature Flags ----
