@@ -29,7 +29,7 @@ import { createClient } from '@supabase/supabase-js';
 // - Project URL: e.g. https://xxxx.supabase.co
 // - Publishable key: sb_publishable_... (replaces legacy anon key)
 const SUPABASE_URL = 'https://bvaxjrydahaeaxvlnbct.supabase.co';
-const SUPABASE_PUBLISHABLE_KEY = 'YOUR_PUBLISHABLE_KEY';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_BVOg7XD9KtK0w3ig9K-pYQ_ECcdyy08';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
