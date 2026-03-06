@@ -45,8 +45,12 @@ export const ADS_ENABLED = Platform.OS === 'web';
 
 /** Whether the publisher ID has been configured (not a placeholder). */
 export function isAdsConfigured(): boolean {
+  const isProduction =
+    typeof process !== 'undefined' &&
+    process.env?.NODE_ENV === 'production';
   return (
     ADS_ENABLED &&
+    isProduction &&
     PUBLISHER_ID !== 'ca-pub-XXXXXXXXXXXXXXXX' &&
     PUBLISHER_ID.startsWith('ca-pub-')
   );
