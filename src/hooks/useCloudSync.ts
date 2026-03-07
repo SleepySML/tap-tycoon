@@ -20,7 +20,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 import { supabase, isSupabaseConfigured } from '../config/supabase';
 import { useAuthStore, selectIsAuthenticated } from '../store/authStore';
-import { useGameStore, GameStore } from '../store/gameStore';
+import { useGameStore, GameStore, DEFAULT_STATE } from '../store/gameStore';
 import { GameState } from '../types';
 
 const CLOUD_SAVE_INTERVAL_MS = 60_000; // 60 seconds
@@ -46,6 +46,7 @@ function extractGameState(store: GameStore): GameState {
     lastSaveTime: Date.now(),
     timePlayed: store.timePlayed,
     sessions: store.sessions,
+    savedUserId: store.savedUserId,
   };
 }
 
@@ -151,6 +152,7 @@ function mergeCloudState(cloudState: GameState): void {
       lastDailyDate: cloudState.lastDailyDate,
       timePlayed: cloudState.timePlayed,
       sessions: cloudState.sessions,
+      savedUserId: cloudState.savedUserId ?? null,
     });
     console.log('[CloudSync] Loaded cloud save (more progress)');
   } else {
@@ -184,8 +186,19 @@ export function useCloudSync(): void {
     if (!isAuthenticated || !userId || !isSupabaseConfigured()) return;
 
     loadFromCloud(userId).then((cloudState) => {
+      const localSavedUserId = useGameStore.getState().savedUserId;
+
       if (cloudState) {
-        mergeCloudState(cloudState);
+        // Stamp the userId so we know who this save belongs to
+        mergeCloudState({ ...cloudState, savedUserId: userId });
+        useGameStore.setState({ savedUserId: userId });
+      } else if (localSavedUserId !== userId) {
+        // New user or different user — local save belongs to someone else, reset
+        useGameStore.setState({ ...DEFAULT_STATE, savedUserId: userId, lastSaveTime: Date.now() });
+        console.log('[CloudSync] Reset local save for new user');
+      } else {
+        // Same user, no cloud save yet — keep local state
+        useGameStore.setState({ savedUserId: userId });
       }
     });
   }, [isAuthenticated, userId]);

@@ -101,4 +101,5 @@ export interface GameState {
   lastSaveTime: number;
   timePlayed: number;
   sessions: number;
+  savedUserId: string | null;         // which user this local save belongs to
 }

@@ -62,7 +62,7 @@ export type GameStore = GameState & GameActions;
 
 // ---- Default State ----
 
-const DEFAULT_STATE: GameState = {
+export const DEFAULT_STATE: GameState = {
   money: 0,
   totalEarned: 0,
   totalTaps: 0,
@@ -78,6 +78,7 @@ const DEFAULT_STATE: GameState = {
   lastSaveTime: Date.now(),
   timePlayed: 0,
   sessions: 0,
+  savedUserId: null,
 };
 
 // ---- Store Creation ----
@@ -297,6 +298,7 @@ export const useGameStore = create<GameStore>()(
         lastSaveTime: Date.now(),
         timePlayed: state.timePlayed,
         sessions: state.sessions,
+        savedUserId: state.savedUserId,
       }),
     },
   ),
