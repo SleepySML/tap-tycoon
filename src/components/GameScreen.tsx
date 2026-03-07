@@ -505,6 +505,7 @@ const styles = StyleSheet.create({
   },
   tabContent: {
     flex: 1,
+    minHeight: 0, // Required on web: prevents flex child from growing beyond its container
   },
   tabContentInner: {
     paddingHorizontal: Spacing.md,
