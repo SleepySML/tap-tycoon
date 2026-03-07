@@ -496,12 +496,14 @@ const styles = StyleSheet.create({
   safe: {
     flex: 1,
     backgroundColor: Colors.bgPrimary,
+    overflow: 'hidden',
   },
   container: {
     flex: 1,
     maxWidth: 500,
     width: '100%',
     alignSelf: 'center',
+    overflow: 'hidden',
   },
   tabContent: {
     flex: 1,

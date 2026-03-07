@@ -42,6 +42,14 @@
         display: flex;
         height: 100%;
         flex: 1;
+        overflow: hidden;
+      }
+      /* Ensure SafeAreaProvider wrapper fills root height */
+      #root > div {
+        height: 100%;
+        display: flex;
+        flex: 1;
+        overflow: hidden;
       }
     </style>
   </head>
