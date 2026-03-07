@@ -56,15 +56,14 @@ function BannerAd() {
       <View style={styles.adWrapper}>
         <div
           ref={adRef}
-          style={{ width: '100%', minHeight: 90 }}
+          style={{ width: '100%', height: 90, overflow: 'hidden' }}
         >
           <ins
             className="adsbygoogle"
-            style={{ display: 'block', width: '100%', minHeight: 90 }}
+            style={{ display: 'block', width: '100%', height: 90, maxHeight: 90, overflow: 'hidden' }}
             data-ad-client={PUBLISHER_ID}
             data-ad-slot={AD_SLOTS.banner}
-            data-ad-format="auto"
-            data-full-width-responsive="true"
+            data-ad-format="horizontal"
           />
         </div>
       </View>
@@ -84,8 +83,8 @@ const styles = StyleSheet.create({
   },
   adWrapper: {
     width: '100%',
-    minHeight: 90,
-    maxHeight: 90,
+    height: 90,
+    overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255,255,255,0.03)',
