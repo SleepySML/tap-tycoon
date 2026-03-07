@@ -23,7 +23,6 @@ import {
   Alert,
   Modal,
   Platform,
-  useWindowDimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -59,8 +58,6 @@ import RewardedAdOverlay from './RewardedAdOverlay';
 const BUY_AMOUNTS: BuyAmount[] = [1, 10, 25, 100, 'max'];
 
 export default function GameScreen() {
-  const { height: windowHeight } = useWindowDimensions();
-
   // ---- Local UI state ----
   const [activeTab, setActiveTab] = useState<TabId>('businesses');
   const [buyAmountIdx, setBuyAmountIdx] = useState(0);
@@ -302,7 +299,7 @@ export default function GameScreen() {
 
   // ---- Main Render ----
   return (
-    <SafeAreaView style={[styles.safe, Platform.OS === 'web' && { height: windowHeight }]} edges={['top']}>
+    <SafeAreaView style={styles.safe} edges={['top']}>
       <StatusBar style="light" />
       <View style={styles.container}>
         <Header

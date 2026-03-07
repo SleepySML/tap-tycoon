@@ -14,7 +14,7 @@
 // ============================================
 
 import React from 'react';
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet, Platform } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useAuthInit } from './src/hooks/useAuth';
 import {
@@ -86,7 +86,16 @@ function AppContent() {
 export default function App() {
   return (
     <SafeAreaProvider>
-      <AppContent />
+      <View style={rootStyles.viewport}>
+        <AppContent />
+      </View>
     </SafeAreaProvider>
   );
 }
+
+const rootStyles = StyleSheet.create({
+  viewport: Platform.select({
+    web: { flex: 1, height: '100vh', overflow: 'hidden' },
+    default: { flex: 1 },
+  }),
+});
