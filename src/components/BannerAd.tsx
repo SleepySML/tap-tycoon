@@ -50,32 +50,24 @@ function BannerAd() {
     );
   }
 
-  // Real AdSense banner
+  // Real AdSense banner — wrapper keeps layout stable while AdSense fills
   return (
     <View style={styles.container}>
-      <div
-        ref={adRef}
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          width: '100%',
-          minHeight: 100,
-        }}
-      >
-        <ins
-          className="adsbygoogle"
-          style={{
-            display: 'block',
-            width: '100%',
-            minHeight: 90,
-          }}
-          data-ad-client={PUBLISHER_ID}
-          data-ad-slot={AD_SLOTS.banner}
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-      </div>
+      <View style={styles.adWrapper}>
+        <div
+          ref={adRef}
+          style={{ width: '100%', minHeight: 90 }}
+        >
+          <ins
+            className="adsbygoogle"
+            style={{ display: 'block', width: '100%', minHeight: 90 }}
+            data-ad-client={PUBLISHER_ID}
+            data-ad-slot={AD_SLOTS.banner}
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+        </div>
+      </View>
     </View>
   );
 }
@@ -89,6 +81,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.bgPrimary,
     borderTopWidth: 1,
     borderTopColor: Colors.borderGlass,
+  },
+  adWrapper: {
+    width: '100%',
+    minHeight: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.03)',
   },
   placeholder: {
     width: '100%',
