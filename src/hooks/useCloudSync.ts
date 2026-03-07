@@ -120,14 +120,22 @@ async function loadFromCloud(
 
 /**
  * Merge cloud state into local state.
- * Strategy: the save with higher totalEarned wins (most progress).
- * This prevents data loss while being simple to understand.
+ * Strategy: more prestiges always wins; within same prestige level,
+ * higher totalEarned wins.
+ *
+ * Using totalEarned alone was wrong: after prestige totalEarned resets
+ * to 0, so the old cloud save (with high totalEarned) would overwrite
+ * the fresh post-prestige local state on every reload.
  */
 function mergeCloudState(cloudState: GameState): void {
   const localState = useGameStore.getState();
 
-  if (cloudState.totalEarned > localState.totalEarned) {
-    // Cloud has more progress — apply it
+  const cloudIsAhead =
+    cloudState.totalPrestiges > localState.totalPrestiges ||
+    (cloudState.totalPrestiges === localState.totalPrestiges &&
+      cloudState.totalEarned > localState.totalEarned);
+
+  if (cloudIsAhead) {
     useGameStore.setState({
       money: cloudState.money,
       totalEarned: cloudState.totalEarned,
@@ -152,12 +160,24 @@ function mergeCloudState(cloudState: GameState): void {
 
 /**
  * Cloud sync hook. Call once at the top level.
- * Handles: load on auth, periodic saves, save on background.
+ * Handles: load on auth, periodic saves, save on background, save on prestige.
  */
 export function useCloudSync(): void {
   const isAuthenticated = useAuthStore(selectIsAuthenticated);
   const userId = useAuthStore((s) => s.user?.id ?? null);
   const intervalRef = useRef<ReturnType<typeof setInterval>>();
+  const totalPrestiges = useGameStore((s) => s.totalPrestiges);
+  const prevPrestiges = useRef(totalPrestiges);
+
+  // Save immediately when prestige count increases — don't wait 60s.
+  // Without this, a reload before the next periodic save would load
+  // the old cloud state (high totalEarned) and undo the prestige.
+  useEffect(() => {
+    if (totalPrestiges > prevPrestiges.current && isAuthenticated && userId && isSupabaseConfigured()) {
+      saveToCloud(userId);
+    }
+    prevPrestiges.current = totalPrestiges;
+  }, [totalPrestiges, isAuthenticated, userId]);
 
   // Load cloud save when user signs in
   useEffect(() => {
