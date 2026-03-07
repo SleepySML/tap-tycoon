@@ -4,7 +4,7 @@
 // ============================================
 
 import React, { memo, useCallback } from 'react';
-import { View, Text, Pressable, StyleSheet, Alert } from 'react-native';
+import { View, Text, Pressable, StyleSheet, Alert, Platform } from 'react-native';
 import { useGameStore } from '../store/gameStore';
 import { PRESTIGE_UPGRADES } from '../config/upgrades';
 import { GAME } from '../config/constants';
@@ -24,6 +24,13 @@ function PrestigePanel() {
   const canPrestige = earnable > 0;
 
   const handlePrestige = useCallback(() => {
+    if (Platform.OS === 'web') {
+      const confirmed = window.confirm(
+        `Prestige?\n\nYou will earn ${earnable} prestige point(s).\nAll businesses and upgrades will be reset.`,
+      );
+      if (confirmed) prestige();
+      return;
+    }
     Alert.alert(
       'Prestige?',
       `You will earn ${earnable} prestige point(s).\nAll businesses and upgrades will be reset.`,
