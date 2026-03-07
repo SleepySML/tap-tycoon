@@ -32,10 +32,11 @@
 
     <!-- The `react-native-web` recommended style reset -->
     <style id="expo-reset">
-      html, body {
+      html {
         height: 100%;
       }
       body {
+        height: 100vh;
         overflow: hidden;
       }
       #root {
@@ -43,6 +44,10 @@
         height: 100%;
         flex: 1;
         overflow: hidden;
+      }
+      #root > div {
+        overflow: auto;
+        height: 100%;
       }
     </style>
   </head>
