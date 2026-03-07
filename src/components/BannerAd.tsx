@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
   adWrapper: {
     width: '100%',
     minHeight: 90,
+    maxHeight: 90,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255,255,255,0.03)',
