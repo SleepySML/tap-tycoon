@@ -4,7 +4,7 @@
   "framework": null,
   "rewrites": [
     { "source": "/privacy", "destination": "/privacy.html" },
-    { "source": "/((?!_expo|favicon\\.ico|privacy\\.html|ads\\.txt|robots\\.txt).*)", "destination": "/index.html" }
+    { "source": "/((?!_expo|favicon\\.ico|privacy\\.html|ads\\.txt|robots\\.txt|google[a-z0-9]+\\.html).*)", "destination": "/index.html" }
   ],
   "headers": [
     {
