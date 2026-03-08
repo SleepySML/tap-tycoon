@@ -32,9 +32,7 @@ import { useAuthStore, selectIsLoading } from '../store/authStore';
 import { useAuthActions } from '../hooks/useAuth';
 import { isTelegramMiniApp } from '../config/telegram';
 
-// Bot username — update this to your bot's username after creating it via @BotFather
-const TELEGRAM_BOT_USERNAME = 'TapTycoonBot';
-const TELEGRAM_MINI_APP_URL = `https://t.me/${TELEGRAM_BOT_USERNAME}`;
+const TELEGRAM_MINI_APP_URL = 'https://t.me/tap_tacoon_bot/Businessman';
 
 function AuthScreen() {
   const isLoading = useAuthStore(selectIsLoading);
