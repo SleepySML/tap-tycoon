@@ -137,7 +137,21 @@ create trigger on_auth_user_created
   for each row execute function public.handle_new_user();
 
 -- ==================
--- 5. INDEXES
+-- 5. TELEGRAM IDENTITY COLUMN
+-- ==================
+-- Store the Telegram user ID on profiles for easy lookup / display.
+-- Populated automatically when a Telegram user signs in via the Edge Function.
+alter table public.profiles
+  add column if not exists telegram_id bigint unique;
+
+-- Allow the Edge Function (service role) to update telegram_id without RLS restrictions.
+-- Client-side updates go through existing RLS policies (users can update own profile).
+create index if not exists idx_profiles_telegram_id
+  on public.profiles (telegram_id)
+  where telegram_id is not null;
+
+-- ==================
+-- 6. INDEXES
 -- ==================
 create index if not exists idx_leaderboards_total_earned
   on public.leaderboards (total_earned desc);

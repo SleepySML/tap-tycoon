@@ -29,6 +29,15 @@ import * as QueryParams from 'expo-auth-session/build/QueryParams';
 import { supabase, isSupabaseConfigured } from '../config/supabase';
 import { useAuthStore } from '../store/authStore';
 import * as localAuth from '../services/localAuth';
+import {
+  isTelegramMiniApp,
+  getTelegramInitData,
+  initTelegramMiniApp,
+} from '../config/telegram';
+import {
+  signInWithTelegramInitData,
+  applyTelegramSession,
+} from '../services/telegramAuth';
 
 // Required for web browser auth session to complete properly
 WebBrowser.maybeCompleteAuthSession();
@@ -101,6 +110,31 @@ export function useAuthInit(): void {
   const { setSession, setInitialized } = useAuthStore();
 
   useEffect(() => {
+    // Telegram Mini App: initialize UI and auto-authenticate before anything else.
+    // When the game opens inside Telegram, the user never sees the auth screen —
+    // Telegram's signed initData is exchanged for a Supabase session server-side.
+    if (Platform.OS === 'web' && isTelegramMiniApp()) {
+      initTelegramMiniApp();
+
+      (async () => {
+        try {
+          const initData = getTelegramInitData()!;
+          const tokens = await signInWithTelegramInitData(initData);
+          await applyTelegramSession(tokens);
+          // After setSession, fetch the resolved session and push it to the store.
+          const { data: { session } } = await supabase.auth.getSession();
+          setSession(session);
+          if (session?.user) ensureProfileForUser(session.user);
+        } catch (err) {
+          console.warn('[TelegramAuth] Auto sign-in failed:', err);
+          // Fall through: auth store remains unset → AuthScreen will render
+        } finally {
+          setInitialized();
+        }
+      })();
+      return;
+    }
+
     if (!isSupabaseConfigured()) {
       // Local auth mode — initialize and restore session
       (async () => {
@@ -173,6 +207,27 @@ export function useAuthInit(): void {
 export function useAuthActions() {
   const setLoading = useAuthStore((s) => s.setLoading);
   const setSession = useAuthStore((s) => s.setSession);
+
+  // ---- Telegram (Mini App initData) ----
+  const signInWithTelegram = useCallback(async (): Promise<{ error: string | null }> => {
+    if (!isSupabaseConfigured()) {
+      return { error: 'Telegram sign-in requires Supabase to be configured.' };
+    }
+    const initData = getTelegramInitData();
+    if (!initData) {
+      return { error: 'Not running inside a Telegram Mini App.' };
+    }
+    try {
+      setLoading(true);
+      const tokens = await signInWithTelegramInitData(initData);
+      await applyTelegramSession(tokens);
+      return { error: null };
+    } catch (err: any) {
+      return { error: err.message ?? 'Telegram sign-in failed.' };
+    } finally {
+      setLoading(false);
+    }
+  }, [setLoading]);
 
   // ---- Google OAuth ----
   const signInWithGoogle = useCallback(async () => {
@@ -334,6 +389,7 @@ export function useAuthActions() {
     signInWithEmail,
     signUpWithEmail,
     signOut,
+    signInWithTelegram,
   };
 }
 

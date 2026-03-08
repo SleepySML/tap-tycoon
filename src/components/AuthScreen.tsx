@@ -25,10 +25,16 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Linking,
 } from 'react-native';
 import { Colors, Spacing, FontSizes, FontWeights, Radii } from '../config/theme';
 import { useAuthStore, selectIsLoading } from '../store/authStore';
 import { useAuthActions } from '../hooks/useAuth';
+import { isTelegramMiniApp } from '../config/telegram';
+
+// Bot username — update this to your bot's username after creating it via @BotFather
+const TELEGRAM_BOT_USERNAME = 'TapTycoonBot';
+const TELEGRAM_MINI_APP_URL = `https://t.me/${TELEGRAM_BOT_USERNAME}`;
 
 function AuthScreen() {
   const isLoading = useAuthStore(selectIsLoading);
@@ -40,10 +46,27 @@ function AuthScreen() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
 
+  // If we're inside a Telegram Mini App and still loading, auto-auth is in progress.
+  // Show a dedicated loading state instead of the full auth form.
+  const inTelegram = Platform.OS === 'web' && isTelegramMiniApp();
+  if (inTelegram && isLoading) {
+    return (
+      <View style={styles.telegramLoading}>
+        <Text style={styles.logo}>💰</Text>
+        <ActivityIndicator size="large" color={Colors.gold} style={{ marginTop: Spacing.xl }} />
+        <Text style={styles.telegramLoadingText}>Signing in with Telegram...</Text>
+      </View>
+    );
+  }
+
   const handleGoogle = useCallback(async () => {
     setError(null);
     await signInWithGoogle();
   }, [signInWithGoogle]);
+
+  const handleOpenInTelegram = useCallback(() => {
+    Linking.openURL(TELEGRAM_MINI_APP_URL);
+  }, []);
 
   const handleEmail = useCallback(async () => {
     if (!email.trim() || !password.trim()) {
@@ -111,6 +134,16 @@ function AuthScreen() {
                 <Text style={styles.googleText}>Continue with Google</Text>
               </>
             )}
+          </Pressable>
+
+          {/* Telegram Button — opens the game as a Telegram Mini App */}
+          <Pressable
+            style={[styles.telegramBtn, isLoading && styles.btnDisabled]}
+            onPress={handleOpenInTelegram}
+            disabled={isLoading}
+          >
+            <Text style={styles.telegramIcon}>✈</Text>
+            <Text style={styles.telegramText}>Open in Telegram</Text>
           </Pressable>
 
           {/* Divider */}
@@ -321,6 +354,40 @@ const styles = StyleSheet.create({
   emailBtnText: {
     fontSize: FontSizes.lg,
     fontWeight: FontWeights.bold,
+    color: '#fff',
+  },
+
+  // Telegram loading (Mini App auto-auth in progress)
+  telegramLoading: {
+    flex: 1,
+    backgroundColor: Colors.bgPrimary,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  telegramLoadingText: {
+    marginTop: Spacing.lg,
+    fontSize: FontSizes.md,
+    color: Colors.textSecondary,
+  },
+
+  // Telegram open button
+  telegramBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: Spacing.md,
+    paddingVertical: Spacing.md,
+    backgroundColor: '#2AABEE',
+    borderRadius: Radii.md,
+    marginTop: Spacing.md,
+  },
+  telegramIcon: {
+    fontSize: FontSizes.lg,
+    color: '#fff',
+  },
+  telegramText: {
+    fontSize: FontSizes.lg,
+    fontWeight: FontWeights.semibold,
     color: '#fff',
   },
 
