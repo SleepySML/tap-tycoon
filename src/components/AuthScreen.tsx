@@ -36,7 +36,7 @@ const TELEGRAM_MINI_APP_URL = 'https://t.me/tap_tacoon_bot/Businessman';
 
 function AuthScreen() {
   const isLoading = useAuthStore(selectIsLoading);
-  const { signInWithGoogle, signInWithEmail, signUpWithEmail } =
+  const { signInWithGoogle, signInWithEmail, signUpWithEmail, signInWithTelegram } =
     useAuthActions();
 
   const [isSignUp, setIsSignUp] = useState(false);
@@ -44,23 +44,22 @@ function AuthScreen() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  // If we're inside a Telegram Mini App and still loading, auto-auth is in progress.
-  // Show a dedicated loading state instead of the full auth form.
+  // True when running inside the Telegram Mini App.
+  // Auto-auth runs in the background via useAuthInit — if it succeeds the user
+  // goes straight to the game. Otherwise the full form below is visible so they
+  // can sign in with Telegram manually, Google, or email.
   const inTelegram = Platform.OS === 'web' && isTelegramMiniApp();
-  if (inTelegram && isLoading) {
-    return (
-      <View style={styles.telegramLoading}>
-        <Text style={styles.logo}>💰</Text>
-        <ActivityIndicator size="large" color={Colors.gold} style={{ marginTop: Spacing.xl }} />
-        <Text style={styles.telegramLoadingText}>Signing in with Telegram...</Text>
-      </View>
-    );
-  }
 
   const handleGoogle = useCallback(async () => {
     setError(null);
     await signInWithGoogle();
   }, [signInWithGoogle]);
+
+  const handleSignInWithTelegram = useCallback(async () => {
+    setError(null);
+    const result = await signInWithTelegram();
+    if (result.error) setError(result.error);
+  }, [signInWithTelegram]);
 
   const handleOpenInTelegram = useCallback(() => {
     Linking.openURL(TELEGRAM_MINI_APP_URL);
@@ -134,14 +133,24 @@ function AuthScreen() {
             )}
           </Pressable>
 
-          {/* Telegram Button — opens the game as a Telegram Mini App */}
+          {/* Telegram Button:
+              - Inside Telegram Mini App → sign in with Telegram identity
+              - Outside Telegram → redirect to the Mini App */}
           <Pressable
             style={[styles.telegramBtn, isLoading && styles.btnDisabled]}
-            onPress={handleOpenInTelegram}
+            onPress={inTelegram ? handleSignInWithTelegram : handleOpenInTelegram}
             disabled={isLoading}
           >
-            <Text style={styles.telegramIcon}>✈</Text>
-            <Text style={styles.telegramText}>Open in Telegram</Text>
+            {isLoading && inTelegram ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <>
+                <Text style={styles.telegramIcon}>✈</Text>
+                <Text style={styles.telegramText}>
+                  {inTelegram ? 'Sign in with Telegram' : 'Open in Telegram'}
+                </Text>
+              </>
+            )}
           </Pressable>
 
           {/* Divider */}
@@ -355,20 +364,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 
-  // Telegram loading (Mini App auto-auth in progress)
-  telegramLoading: {
-    flex: 1,
-    backgroundColor: Colors.bgPrimary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  telegramLoadingText: {
-    marginTop: Spacing.lg,
-    fontSize: FontSizes.md,
-    color: Colors.textSecondary,
-  },
-
-  // Telegram open button
+  // Telegram button
   telegramBtn: {
     flexDirection: 'row',
     alignItems: 'center',
