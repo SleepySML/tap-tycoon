@@ -219,6 +219,14 @@ function AuthScreen() {
               </Text>
             </Text>
           </Pressable>
+
+          {/* Privacy Policy link */}
+          <Pressable
+            style={styles.privacyRow}
+            onPress={() => Linking.openURL('/privacy')}
+          >
+            <Text style={styles.privacyText}>Privacy Policy</Text>
+          </Pressable>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -397,5 +405,14 @@ const styles = StyleSheet.create({
   toggleLink: {
     color: Colors.blue,
     fontWeight: FontWeights.semibold,
+  },
+  privacyRow: {
+    alignItems: 'center',
+    marginTop: Spacing.md,
+  },
+  privacyText: {
+    fontSize: FontSizes.xs,
+    color: Colors.textMuted,
+    textDecorationLine: 'underline',
   },
 });
