@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tap Tycoon — Build Your Idle Empire</title>
+  <meta name="description" content="Tap Tycoon is a free idle clicker game. Build businesses, earn passive income, and grow your empire from a lemonade stand to an oil company. Play in your browser — no download needed." />
+  <meta name="keywords" content="idle game, clicker game, tycoon game, browser game, free game, tap game, business game" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Tap Tycoon — Build Your Idle Empire" />
+  <meta property="og:description" content="Free idle clicker game. Buy businesses, earn passive income, grow your empire — play in your browser." />
+  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-7610075308812167" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7610075308812167" crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #ffd700;
+      --gold-dim: #b8960c;
+      --bg: #0a0a1a;
+      --bg2: #12122a;
+      --bg3: #1a1a35;
+      --text: #e8e8f0;
+      --text2: #9090b0;
+      --green: #22c55e;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ---- NAV ---- */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      background: rgba(10,10,26,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--gold); }
+    .nav-play {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--gold);
+      color: #0a0a1a;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .nav-play:hover { background: #ffe033; text-decoration: none; }
+
+    /* ---- HERO ---- */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero-emoji { font-size: 80px; display: block; margin-bottom: 20px; }
+    h1 {
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 3vw, 20px);
+      color: var(--text2);
+      max-width: 520px;
+      margin: 0 auto 36px;
+    }
+    .cta-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--gold);
+      color: #0a0a1a;
+      font-size: 18px;
+      font-weight: 800;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: transform .15s, background .15s;
+    }
+    .btn-primary:hover { background: #ffe033; transform: translateY(-2px); text-decoration: none; }
+    .btn-secondary {
+      display: inline-block;
+      padding: 16px 28px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 16px;
+      border-radius: 12px;
+      text-decoration: none;
+    }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); text-decoration: none; }
+
+    /* ---- AD BANNER ---- */
+    .ad-wrap {
+      max-width: 728px;
+      margin: 0 auto;
+      padding: 0 24px 40px;
+      text-align: center;
+    }
+    .ad-label {
+      font-size: 10px;
+      color: var(--text2);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    /* ---- SECTION ---- */
+    section { padding: 64px 24px; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+    .section-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--text2);
+      margin-bottom: 48px;
+      font-size: 16px;
+    }
+
+    /* ---- HOW IT WORKS ---- */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
+    .step {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: #0a0a1a;
+      font-weight: 900;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    .step h3 { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .step p { font-size: 14px; color: var(--text2); }
+
+    /* ---- BUSINESSES ---- */
+    .biz-section { background: var(--bg2); }
+    .biz-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px; }
+    .biz-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .biz-icon { font-size: 36px; margin-bottom: 10px; }
+    .biz-name { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .biz-desc { font-size: 12px; color: var(--text2); }
+
+    /* ---- FEATURES ---- */
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .feature {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .feature-icon { font-size: 28px; flex-shrink: 0; }
+    .feature h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+    .feature p { font-size: 13px; color: var(--text2); }
+
+    /* ---- STATS ---- */
+    .stats-section { text-align: center; }
+    .stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .stat-num { font-size: 42px; font-weight: 900; color: var(--gold); display: block; }
+    .stat-label { font-size: 14px; color: var(--text2); margin-top: 4px; }
+
+    /* ---- CTA SECTION ---- */
+    .cta-section {
+      background: linear-gradient(135deg, #12122a 0%, #1a1535 100%);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .cta-box { text-align: center; max-width: 560px; margin: 0 auto; }
+    .cta-box h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: var(--gold); margin-bottom: 12px; }
+    .cta-box p { color: var(--text2); margin-bottom: 32px; font-size: 16px; }
+
+    /* ---- FOOTER ---- */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 13px;
+    }
+    footer .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+    footer .footer-links a { color: var(--text2); }
+    footer .footer-links a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-brand">💰 Tap Tycoon</span>
+    <a class="nav-play" href="/play">Play Free →</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-emoji">💰</span>
+    <h1>Build Your Idle Empire</h1>
+    <p class="hero-sub">
+      Start with a lemonade stand. Grow into an oil tycoon.
+      Tap to earn, buy businesses, unlock upgrades — all for free in your browser.
+    </p>
+    <div class="cta-group">
+      <a class="btn-primary" href="/play">Play Now — It's Free</a>
+      <a class="btn-secondary" href="#how-it-works">How it works</a>
+    </div>
+  </div>
+
+  <!-- TOP AD -->
+  <div class="ad-wrap">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7610075308812167"
+         data-ad-slot="9201832743"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works">
+    <div class="section-inner">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-sub">Three simple steps to building your empire</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Tap to Earn</h3>
+          <p>Click the big money button to earn your first dollars and get the business empire started.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Buy Businesses</h3>
+          <p>Invest in businesses that generate passive income automatically — even when you're away.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Unlock Upgrades</h3>
+          <p>Spend your fortune on upgrades and prestige boosts to multiply your earnings exponentially.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESSES -->
+  <section class="biz-section">
+    <div class="section-inner">
+      <h2 class="section-title">10 Businesses to Build</h2>
+      <p class="section-sub">From a lemonade stand to a global oil empire — grow at your own pace</p>
+      <div class="biz-grid">
+        <div class="biz-card"><div class="biz-icon">🍋</div><div class="biz-name">Lemonade Stand</div><div class="biz-desc">A refreshing start to your empire</div></div>
+        <div class="biz-card"><div class="biz-icon">📰</div><div class="biz-name">Newspaper Route</div><div class="biz-desc">Deliver the daily news</div></div>
+        <div class="biz-card"><div class="biz-icon">🚗</div><div class="biz-name">Car Wash</div><div class="biz-desc">Keep the city shiny</div></div>
+        <div class="biz-card"><div class="biz-icon">🍕</div><div class="biz-name">Pizza Shop</div><div class="biz-desc">Everyone loves pizza</div></div>
+        <div class="biz-card"><div class="biz-icon">🍩</div><div class="biz-name">Donut Factory</div><div class="biz-desc">Mass-produce delicious donuts</div></div>
+        <div class="biz-card"><div class="biz-icon">🦐</div><div class="biz-name">Shrimp Boat</div><div class="biz-desc">Harvest the ocean's bounty</div></div>
+        <div class="biz-card"><div class="biz-icon">🏒</div><div class="biz-name">Hockey Team</div><div class="biz-desc">Own a professional sports team</div></div>
+        <div class="biz-card"><div class="biz-icon">🎬</div><div class="biz-name">Movie Studio</div><div class="biz-desc">Produce blockbuster films</div></div>
+        <div class="biz-card"><div class="biz-icon">🏦</div><div class="biz-name">Bank</div><div class="biz-desc">Control the flow of money</div></div>
+        <div class="biz-card"><div class="biz-icon">🛢️</div><div class="biz-name">Oil Company</div><div class="biz-desc">The ultimate money machine</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section>
+    <div class="section-inner">
+      <h2 class="section-title">Everything You Need</h2>
+      <p class="section-sub">A full-featured idle game in your browser</p>
+      <div class="features">
+        <div class="feature">
+          <span class="feature-icon">⚡</span>
+          <div>
+            <h3>Prestige System</h3>
+            <p>Reset your progress for permanent multipliers — reach new heights each run.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🏆</span>
+          <div>
+            <h3>Achievements</h3>
+            <p>Unlock dozens of achievements as you hit milestones and master the game.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🔄</span>
+          <div>
+            <h3>Cloud Sync</h3>
+            <p>Your progress is saved automatically — continue on any device, any browser.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🎁</span>
+          <div>
+            <h3>Boost Rewards</h3>
+            <p>Watch a short ad to activate a powerful multiplier and skyrocket your income.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">📱</span>
+          <div>
+            <h3>Mobile Ready</h3>
+            <p>Fully responsive — plays great on desktop, tablet, and mobile browsers.</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🆓</span>
+          <div>
+            <h3>100% Free</h3>
+            <p>No purchase required. No pay-to-win. Just sign in and start building.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MID AD -->
+  <div class="ad-wrap" style="padding-bottom: 0;">
+    <p class="ad-label">Advertisement</p>
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-7610075308812167"
+         data-ad-slot="9201832743"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <!-- STATS -->
+  <section class="stats-section">
+    <div class="section-inner">
+      <h2 class="section-title">The Numbers</h2>
+      <p class="section-sub" style="margin-bottom: 40px;">What awaits you in Tap Tycoon</p>
+      <div class="stats">
+        <div>
+          <span class="stat-num">10</span>
+          <div class="stat-label">Unique Businesses</div>
+        </div>
+        <div>
+          <span class="stat-num">∞</span>
+          <div class="stat-label">Passive Income</div>
+        </div>
+        <div>
+          <span class="stat-num">50+</span>
+          <div class="stat-label">Upgrades to Unlock</div>
+        </div>
+        <div>
+          <span class="stat-num">0$</span>
+          <div class="stat-label">Cost to Play</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="section-inner">
+      <div class="cta-box">
+        <h2>Ready to Build Your Empire?</h2>
+        <p>Join thousands of players and start your journey from zero to tycoon — right now, for free.</p>
+        <a class="btn-primary" href="/play">Start Playing Free →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="/play">Play Game</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="mailto:privacy@taptycoon.com">Contact</a>
+    </div>
+    <p>&copy; 2026 Tap Tycoon. All rights reserved. Free to play idle browser game.</p>
+  </footer>
+
+</body>
+</html>
