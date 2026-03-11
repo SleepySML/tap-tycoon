@@ -7,7 +7,7 @@ module.exports = defineConfig({
   retries: 1,
   reporter: 'list',
   use: {
-    baseURL: 'https://500-dollar-game.vercel.app',
+    baseURL: 'https://basementtycoon.com',
     headless: true,
     screenshot: 'only-on-failure',
     video: 'off',

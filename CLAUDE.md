@@ -20,10 +20,10 @@ node <test-file>.js
 const { chromium } = require('playwright');
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
-await page.goto('https://500-dollar-game.vercel.app/', { waitUntil: 'networkidle' });
+await page.goto('https://basementtycoon.com/', { waitUntil: 'networkidle' });
 ```
 
-**Production URL:** https://500-dollar-game.vercel.app/
+**Production URL:** https://basementtycoon.com/
 
 **Test credentials:**
 - Email: `scrolltest@taptycoon.com` / Password: `test123456`
