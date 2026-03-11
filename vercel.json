@@ -15,7 +15,7 @@
       "headers": { "cache-control": "public, max-age=31536000, immutable" }
     },
     {
-      "src": "^/(ads\\.txt|robots\\.txt|favicon\\.png|apple-touch-icon\\.png|og-image\\.png|google[a-z0-9]+\\.html|privacy\\.html|about\\.html|contact\\.html|terms\\.html|landing\\.html)$",
+      "src": "^/(ads\\.txt|robots\\.txt|sitemap\\.xml|favicon\\.png|apple-touch-icon\\.png|og-image\\.png|google[a-z0-9]+\\.html|privacy\\.html|about\\.html|contact\\.html|terms\\.html|landing\\.html)$",
       "dest": "/$1"
     },
     { "src": "^/(.*)", "dest": "/index.html" }
