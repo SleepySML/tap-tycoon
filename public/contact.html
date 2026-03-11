@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Tap Tycoon</title>
+  <meta name="description" content="Contact the Tap Tycoon team. Send us your feedback, bug reports, or suggestions for the free idle clicker game." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-7610075308812167" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7610075308812167" crossorigin="anonymous"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #ffd700;
+      --bg: #0a0a1a;
+      --bg2: #12122a;
+      --bg3: #1a1a35;
+      --text: #e8e8f0;
+      --text2: #9090b0;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      background: rgba(10,10,26,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--gold); text-decoration: none; }
+    .nav-brand:hover { text-decoration: none; }
+    .nav-play {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--gold);
+      color: #0a0a1a;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .nav-play:hover { background: #ffe033; text-decoration: none; }
+
+    /* CONTENT */
+    main { max-width: 800px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+
+    .page-subtitle {
+      font-size: 16px;
+      color: var(--text2);
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 48px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    p { color: #c0c0d0; margin-bottom: 16px; }
+
+    .contact-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      margin-top: 32px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .contact-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .contact-info h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .contact-info p { margin-bottom: 8px; }
+    .contact-email {
+      display: inline-block;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .topic {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .topic-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .topic-desc {
+      font-size: 13px;
+      color: var(--text2);
+      margin-bottom: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 13px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .footer-links a { color: var(--text2); }
+    .footer-links a:hover { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-brand" href="/">💰 Tap Tycoon</a>
+    <a class="nav-play" href="/play">Play Free →</a>
+  </nav>
+
+  <main>
+    <h1>Contact Us</h1>
+    <p class="page-subtitle">We would love to hear from you — whether it is a bug report, a suggestion, or just a hello.</p>
+
+    <section>
+      <h2>Get in Touch</h2>
+      <p>
+        The Tap Tycoon team is a small independent group passionate about building fun, free games.
+        We read every message we receive and do our best to respond within a few business days.
+        Your feedback directly shapes how the game evolves, so please do not hesitate to reach out.
+      </p>
+      <p>
+        Whether you have found a bug, have an idea for a new feature, want to report an issue with
+        advertising on the site, or simply want to share how your empire is going — drop us a line.
+        There are no support tickets or chatbots here, just a real email inbox.
+      </p>
+
+      <div class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-info">
+          <h3>Email</h3>
+          <p>For general inquiries, feedback, and suggestions:</p>
+          <a class="contact-email" href="mailto:contact@500dollargame.com">contact@500dollargame.com</a>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>What Can You Write to Us About?</h2>
+      <p>
+        We welcome messages on any topic related to Tap Tycoon. Here are some common reasons
+        players get in touch — but feel free to write about anything at all:
+      </p>
+      <div class="topics-grid">
+        <div class="topic">
+          <div class="topic-title">🐛 Bug Reports</div>
+          <p class="topic-desc">Found something broken? Let us know and we will fix it fast.</p>
+        </div>
+        <div class="topic">
+          <div class="topic-title">💡 Feature Suggestions</div>
+          <p class="topic-desc">Have an idea for a new business, upgrade, or game mechanic?</p>
+        </div>
+        <div class="topic">
+          <div class="topic-title">🔒 Privacy Questions</div>
+          <p class="topic-desc">Questions about your data or account? We are happy to help.</p>
+        </div>
+        <div class="topic">
+          <div class="topic-title">📢 Advertising</div>
+          <p class="topic-desc">Ad-related concerns or partnership inquiries.</p>
+        </div>
+        <div class="topic">
+          <div class="topic-title">🏆 General Feedback</div>
+          <p class="topic-desc">Tell us what you love or what could be better.</p>
+        </div>
+        <div class="topic">
+          <div class="topic-title">💬 Just Saying Hi</div>
+          <p class="topic-desc">We appreciate hearing from our players — any message is welcome.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Response Time</h2>
+      <p>
+        We aim to respond to all messages within 2–3 business days. During busy periods —
+        such as after a major game update — response times may be slightly longer. We appreciate
+        your patience and promise to get back to every genuine inquiry.
+      </p>
+      <p>
+        If you are reporting a critical bug that is preventing you from playing, please include
+        your browser name and version, your operating system, and a brief description of what
+        happened and what you expected to happen. Screenshots are always helpful if you can include them.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/play">Play Game</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+    <p>&copy; 2026 Tap Tycoon. All rights reserved. Free idle browser game.</p>
+  </footer>
+
+</body>
+</html>

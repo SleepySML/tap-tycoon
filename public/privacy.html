@@ -4,156 +4,316 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Privacy Policy — Tap Tycoon</title>
-  <meta name="description" content="Privacy Policy for Tap Tycoon — learn how we collect and use your data." />
+  <meta name="description" content="Privacy Policy for Tap Tycoon — learn how we collect, use, and protect your data in this free idle clicker browser game." />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Google AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-7610075308812167" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7610075308812167" crossorigin="anonymous"></script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #ffd700;
+      --bg: #0a0a1a;
+      --bg2: #12122a;
+      --text: #e8e8f0;
+      --text2: #9090b0;
+      --border: rgba(255,255,255,0.08);
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0a0a1a;
-      color: #e0e0e0;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.7;
-      padding: 40px 20px 80px;
     }
-    .container { max-width: 760px; margin: 0 auto; }
-    .back {
-      display: inline-flex;
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      color: #ffd700;
-      text-decoration: none;
-      font-size: 14px;
-      margin-bottom: 40px;
-      opacity: 0.8;
+      justify-content: space-between;
+      padding: 14px 24px;
+      background: rgba(10,10,26,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
     }
-    .back:hover { opacity: 1; }
-    h1 {
-      font-size: 32px;
-      font-weight: 800;
-      color: #ffd700;
-      margin-bottom: 8px;
-    }
-    .updated {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 40px;
-    }
-    h2 {
-      font-size: 18px;
+    .nav-brand { font-size: 20px; font-weight: 800; color: var(--gold); text-decoration: none; }
+    .nav-brand:hover { text-decoration: none; }
+    .nav-play {
+      display: inline-block;
+      padding: 8px 20px;
+      background: var(--gold);
+      color: #0a0a1a;
       font-weight: 700;
-      color: #ffffff;
-      margin-top: 36px;
-      margin-bottom: 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      text-decoration: none;
     }
-    p { margin-bottom: 14px; color: #c0c0c0; }
-    ul { padding-left: 20px; margin-bottom: 14px; color: #c0c0c0; }
-    li { margin-bottom: 6px; }
-    a { color: #ffd700; }
-    .divider { border: none; border-top: 1px solid #1e1e2e; margin: 40px 0; }
+    .nav-play:hover { background: #ffe033; text-decoration: none; }
+
+    /* CONTENT */
+    main { max-width: 800px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 900;
+      color: var(--gold);
+      margin-bottom: 8px;
+      line-height: 1.15;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: var(--text2);
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      margin-top: 48px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    p { color: #c0c0d0; margin-bottom: 16px; }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+      color: #c0c0d0;
+    }
+    li { margin-bottom: 8px; }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 56px 0 32px;
+    }
+
+    .footer-note {
+      font-size: 13px;
+      color: var(--text2);
+      text-align: center;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--text2);
+      font-size: 13px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    .footer-links a { color: var(--text2); }
+    .footer-links a:hover { color: var(--gold); text-decoration: none; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a class="back" href="/">&#8592; Back to Tap Tycoon</a>
 
+  <nav>
+    <a class="nav-brand" href="/">💰 Tap Tycoon</a>
+    <a class="nav-play" href="/play">Play Free →</a>
+  </nav>
+
+  <main>
     <h1>Privacy Policy</h1>
-    <p class="updated">Last updated: March 8, 2026</p>
+    <p class="page-subtitle">Last updated: March 8, 2026</p>
 
     <p>
       This Privacy Policy describes how Tap Tycoon ("we", "us", or "our") collects,
       uses, and shares information when you use our web application at
       <a href="https://500-dollar-game.vercel.app">500-dollar-game.vercel.app</a>
-      (the "Service").
+      (the "Service"). By using the Service, you agree to the collection and use of
+      information as described in this policy.
     </p>
 
-    <h2>1. Information We Collect</h2>
-    <p>We collect the following information when you use the Service:</p>
-    <ul>
-      <li><strong>Account data:</strong> email address and password hash when you register with email, or your Google/Telegram account identifier when you use OAuth sign-in.</li>
-      <li><strong>Game progress data:</strong> in-game state (businesses owned, currency balance, upgrades, achievements) stored in our database so your progress syncs across devices.</li>
-      <li><strong>Usage data:</strong> basic analytics such as session duration and feature interactions, collected to improve the game.</li>
-    </ul>
+    <section>
+      <h2>1. Information We Collect</h2>
+      <p>
+        We collect only the information necessary to provide and improve the Service.
+        This includes both information you provide directly and non-personal data
+        collected automatically:
+      </p>
+      <ul>
+        <li><strong>Account data:</strong> your email address and password hash when you register, or your Google account identifier when you use OAuth sign-in.</li>
+        <li><strong>Game progress data:</strong> in-game state such as businesses owned, currency balance, upgrades, and achievements — stored so your progress syncs across devices.</li>
+        <li><strong>Non-personal usage data:</strong> browser type and version, device type (desktop or mobile), operating system, pages visited on this site, and session duration. This data is collected in aggregate and cannot be used to identify you personally.</li>
+        <li><strong>Log data:</strong> standard server logs including IP address, access times, and referring URLs, retained for security and diagnostic purposes.</li>
+      </ul>
+    </section>
 
-    <h2>2. How We Use Your Information</h2>
-    <ul>
-      <li>To create and manage your account.</li>
-      <li>To save and sync your game progress.</li>
-      <li>To improve the Service.</li>
-      <li>To display relevant advertisements via Google AdSense.</li>
-    </ul>
+    <section>
+      <h2>2. How We Use Your Information</h2>
+      <p>We use the information we collect to:</p>
+      <ul>
+        <li>Create and manage your player account.</li>
+        <li>Save and synchronize your game progress across devices.</li>
+        <li>Improve and develop new features for the Service.</li>
+        <li>Display relevant advertisements through Google AdSense.</li>
+        <li>Diagnose technical issues and monitor service performance.</li>
+        <li>Respond to your support requests and communications.</li>
+      </ul>
+    </section>
 
-    <h2>3. Google AdSense and Advertising</h2>
-    <p>
-      We use Google AdSense to display advertisements. Google and its partners may use
-      cookies and similar technologies to show you personalized ads based on your browsing
-      activity across sites. You can opt out of personalized advertising by visiting
-      <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">
-        Google Ads Settings
-      </a> or
-      <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">
-        aboutads.info
-      </a>.
-    </p>
-    <p>
-      Google's use of advertising cookies is governed by
-      <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">
-        Google's Privacy Policy
-      </a>.
-    </p>
+    <section>
+      <h2>3. Cookies</h2>
+      <p>
+        We use cookies and browser local storage to keep you signed in between sessions and
+        to save your game state locally for fast loading. These are essential cookies required
+        for the Service to function correctly.
+      </p>
+      <p>
+        You can disable cookies through your browser settings. Please note that disabling
+        cookies may prevent you from staying signed in and may affect certain features of the
+        Service. We do not use cookies to track your activity across unrelated third-party websites.
+      </p>
+    </section>
 
-    <h2>4. Cookies</h2>
-    <p>
-      We use cookies and local storage to keep you signed in and to save your game session.
-      Third-party advertising partners (Google AdSense) may also set cookies. You can
-      disable cookies in your browser settings, but some features of the Service may not
-      work correctly.
-    </p>
+    <section>
+      <h2>4. Google AdSense and Advertising Cookies</h2>
+      <p>
+        We use Google AdSense to display advertisements on this website. Google AdSense is an
+        advertising service provided by Google LLC. Google and its advertising partners use
+        cookies and similar tracking technologies to serve ads that are relevant to your
+        interests based on your browsing activity across websites and apps.
+      </p>
+      <p>
+        These advertising cookies may collect information such as your IP address, browser
+        type, pages visited, and interactions with ads. This information is used by Google to
+        provide personalized advertising. The use of advertising cookies by Google is governed
+        by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
+      </p>
+      <p>
+        You can opt out of personalized advertising and manage your Google ad settings by visiting
+        <a href="https://adssettings.google.com" target="_blank" rel="noopener">adssettings.google.com</a>.
+        You may also opt out through the
+        <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener">Digital Advertising Alliance opt-out page</a>.
+        Note that opting out of personalized ads does not mean you will see fewer ads — it means
+        the ads shown will be less tailored to your interests.
+      </p>
+    </section>
 
-    <h2>5. Data Storage and Security</h2>
-    <p>
-      Your account and game data are stored in Supabase, a cloud database service.
-      We take reasonable measures to protect your data but cannot guarantee absolute security.
-    </p>
+    <section>
+      <h2>5. Data Storage and Security</h2>
+      <p>
+        Your account and game data are stored securely using Supabase, a cloud database service
+        with industry-standard security practices. We take reasonable technical and organizational
+        measures to protect your data against unauthorized access, disclosure, or loss.
+      </p>
+      <p>
+        While we strive to protect your personal information, no method of transmission over
+        the internet or electronic storage is 100% secure. We cannot guarantee absolute security,
+        and use of the Service is at your own risk.
+      </p>
+    </section>
 
-    <h2>6. Third-Party Services</h2>
-    <p>We use the following third-party services:</p>
-    <ul>
-      <li><strong>Supabase</strong> — authentication and database (<a href="https://supabase.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>)</li>
-      <li><strong>Google AdSense</strong> — advertising (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>)</li>
-      <li><strong>Google Sign-In</strong> — OAuth authentication (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>)</li>
-    </ul>
+    <section>
+      <h2>6. Third-Party Services</h2>
+      <p>We use the following third-party services, each governed by their own privacy policies:</p>
+      <ul>
+        <li><strong>Supabase</strong> — authentication and database storage (<a href="https://supabase.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>)</li>
+        <li><strong>Google AdSense</strong> — advertising (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>)</li>
+        <li><strong>Google Sign-In</strong> — OAuth authentication (<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a>)</li>
+        <li><strong>Vercel</strong> — web hosting and content delivery (<a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>)</li>
+      </ul>
+      <p>
+        We are not responsible for the privacy practices of these third-party services. We
+        encourage you to review their privacy policies before using the Service.
+      </p>
+    </section>
 
-    <h2>7. Children's Privacy</h2>
-    <p>
-      The Service is not directed to children under the age of 13. We do not knowingly
-      collect personal information from children under 13. If you believe a child has
-      provided us with personal data, please contact us and we will delete it.
-    </p>
+    <section>
+      <h2>7. Children's Information</h2>
+      <p>
+        The Service is not directed to children under the age of 13, and we do not knowingly
+        collect personal information from anyone under 13 years of age. If you are a parent or
+        guardian and believe that your child has provided us with personal information without
+        your consent, please contact us immediately at
+        <a href="mailto:contact@500dollargame.com">contact@500dollargame.com</a>.
+      </p>
+      <p>
+        Upon receiving such a request, we will take prompt steps to delete the relevant
+        information from our records. We comply with applicable laws regarding the online
+        privacy of children.
+      </p>
+    </section>
 
-    <h2>8. Your Rights</h2>
-    <p>You may request to:</p>
-    <ul>
-      <li>Access the personal data we hold about you.</li>
-      <li>Delete your account and associated data.</li>
-      <li>Correct inaccurate data.</li>
-    </ul>
-    <p>To exercise these rights, contact us at the email below.</p>
+    <section>
+      <h2>8. Your Rights</h2>
+      <p>
+        Depending on your location, you may have certain rights regarding your personal
+        information, including the right to access, correct, or delete the data we hold about you.
+        You may request to:
+      </p>
+      <ul>
+        <li>Access a copy of the personal data we hold about you.</li>
+        <li>Request correction of any inaccurate or incomplete data.</li>
+        <li>Request deletion of your account and all associated personal data.</li>
+        <li>Object to or restrict certain types of processing of your data.</li>
+      </ul>
+      <p>
+        To exercise any of these rights, please contact us using the email address in the
+        section below. We will respond to all legitimate requests within a reasonable timeframe.
+      </p>
+    </section>
 
-    <h2>9. Changes to This Policy</h2>
-    <p>
-      We may update this Privacy Policy from time to time. We will notify you of material
-      changes by updating the "Last updated" date at the top of this page.
-    </p>
+    <section>
+      <h2>9. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time to reflect changes in our practices
+        or applicable laws. We will notify you of any material changes by updating the
+        "Last updated" date at the top of this page. We encourage you to review this policy
+        periodically to stay informed about how we protect your information.
+      </p>
+    </section>
 
-    <h2>10. Contact</h2>
-    <p>
-      If you have any questions about this Privacy Policy, please contact us at:<br />
-      <a href="mailto:privacy@taptycoon.com">privacy@taptycoon.com</a>
-    </p>
+    <section>
+      <h2>10. Contact</h2>
+      <p>
+        If you have any questions, concerns, or requests regarding this Privacy Policy or the
+        way we handle your data, please contact us at:<br />
+        <a href="mailto:contact@500dollargame.com">contact@500dollargame.com</a>
+      </p>
+      <p>
+        You can also visit our <a href="/contact">Contact page</a> for more information.
+      </p>
+    </section>
 
     <hr class="divider" />
-    <p style="font-size:13px; color:#555; text-align:center;">
-      &copy; 2026 Tap Tycoon. All rights reserved.
-    </p>
-  </div>
+    <p class="footer-note">&copy; 2026 Tap Tycoon. All rights reserved.</p>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/play">Play Game</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+    <p>&copy; 2026 Tap Tycoon. All rights reserved. Free idle browser game.</p>
+  </footer>
+
 </body>
 </html>

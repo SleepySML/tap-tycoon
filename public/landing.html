@@ -222,6 +222,67 @@
     .cta-box h2 { font-size: clamp(24px, 4vw, 36px); font-weight: 800; color: var(--gold); margin-bottom: 12px; }
     .cta-box p { color: var(--text2); margin-bottom: 32px; font-size: 16px; }
 
+    /* ---- CONTENT SECTIONS ---- */
+    .content-section { padding: 64px 24px; }
+    .content-section .section-inner { max-width: 860px; }
+    .content-section h2 { text-align: left; margin-bottom: 12px; }
+    .content-section .section-sub { text-align: left; margin-bottom: 0; }
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 40px;
+      margin-top: 40px;
+    }
+    .content-col h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .content-col p { font-size: 15px; color: var(--text2); margin-bottom: 14px; }
+
+    .rules-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+    .rules-list li {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .rules-list li::before { content: "▸ "; color: var(--gold); font-weight: 700; }
+
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 32px;
+    }
+    .tip-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 20px;
+    }
+    .tip-card .tip-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .tip-card h3 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .tip-card p { font-size: 13px; color: var(--text2); margin-bottom: 0; }
+
     /* ---- FOOTER ---- */
     footer {
       padding: 32px 24px;
@@ -230,9 +291,9 @@
       color: var(--text2);
       font-size: 13px;
     }
-    footer .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
+    footer .footer-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
     footer .footer-links a { color: var(--text2); }
-    footer .footer-links a:hover { color: var(--gold); }
+    footer .footer-links a:hover { color: var(--gold); text-decoration: none; }
   </style>
 </head>
 <body>
@@ -404,6 +465,177 @@
     </div>
   </section>
 
+  <!-- WHAT IS TAP TYCOON -->
+  <section class="content-section">
+    <div class="section-inner">
+      <h2 class="section-title" style="text-align:center;">What Is Tap Tycoon?</h2>
+      <p class="section-sub">Everything you need to know about the game before you start playing</p>
+      <div class="content-grid">
+        <div class="content-col">
+          <h3>A Free Idle Clicker Browser Game</h3>
+          <p>
+            Tap Tycoon is a free, casual idle clicker game that runs directly in your web browser —
+            no download, no app store, no installation required. You start as a humble entrepreneur
+            with a single lemonade stand and build your way up to owning banks and oil companies.
+          </p>
+          <p>
+            The game blends two proven genres: the satisfying instant feedback of clicker games with
+            the long-term strategy of idle tycoon simulations. Tap to earn money in the beginning,
+            then gradually step back as your passive income does the work for you.
+          </p>
+          <p>
+            Tap Tycoon is completely free to play. There are no in-app purchases, no pay-to-win
+            mechanics, and no premium currency walls. Every feature in the game is accessible to
+            every player from the very first moment.
+          </p>
+        </div>
+        <div class="content-col">
+          <h3>Build Your Business Empire</h3>
+          <p>
+            The core loop is simple and deeply satisfying: earn money by tapping, spend it on
+            businesses that generate passive income, then reinvest that income into upgrades that
+            multiply your earnings. Over time, your income per second grows from a few cents
+            to millions of dollars — all without lifting a finger.
+          </p>
+          <p>
+            The prestige system adds a layer of long-term strategy. Once your total earnings reach
+            a milestone, you can reset your businesses in exchange for a permanent multiplier that
+            makes every future run faster and more profitable. Each prestige is a fresh start that
+            feels more powerful than the last.
+          </p>
+          <p>
+            With 10 businesses to unlock, 50+ upgrades to discover, and dozens of achievements
+            to earn, there is always a new goal to work toward — whether you have five minutes
+            or five hours to play.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO PLAY -->
+  <section class="content-section biz-section">
+    <div class="section-inner">
+      <h2 class="section-title" style="text-align:center;">How to Play</h2>
+      <p class="section-sub">Get up and running in minutes with this quick guide</p>
+      <div class="content-grid">
+        <div class="content-col">
+          <h3>Step 1 — Start Tapping</h3>
+          <p>
+            Create a free account using your Google account or email and password, then jump
+            straight into the game. You will land on the main screen with the tap button
+            front and center. Every tap earns you money — start clicking to fund your first investment.
+          </p>
+          <p>
+            In the early game, tapping is your primary income source. Each tap earns a base amount
+            that grows over time as you unlock tap-boosting upgrades. The more you invest in
+            tap upgrades, the more valuable each click becomes.
+          </p>
+          <h3>Step 2 — Buy Your First Business</h3>
+          <p>
+            Head to the Business tab and purchase your first Lemonade Stand as soon as you have
+            enough cash. Businesses generate income automatically every second without any tapping
+            required. The more businesses you own and the higher their level, the more passive
+            income you earn.
+          </p>
+          <p>
+            Each time you buy an additional copy of the same business, its income output increases.
+            Owning 10, 25, 50, or 100 units of a business triggers special milestone bonuses
+            that dramatically boost its earning potential.
+          </p>
+        </div>
+        <div class="content-col">
+          <h3>Step 3 — Unlock Upgrades</h3>
+          <p>
+            The Upgrades tab contains powerful one-time purchases that permanently enhance your
+            earnings. Upgrades multiply tap income, boost specific businesses, reduce purchase costs,
+            and provide global income multipliers. Prioritize upgrades that affect businesses you
+            already own heavily.
+          </p>
+          <p>
+            As you grow richer, upgrades become increasingly impactful. A single late-game upgrade
+            can double or triple your entire passive income. Keep an eye on the Upgrades tab
+            and purchase new ones as they become available — they are almost always worth it.
+          </p>
+          <h3>Step 4 — Prestige and Repeat</h3>
+          <p>
+            Once you have earned enough total money, the Prestige tab becomes available. Prestiging
+            resets your businesses and cash in exchange for Prestige Points, which provide a
+            permanent percentage bonus to all income. Your next run starts from scratch, but with
+            a multiplier that makes everything happen much faster.
+          </p>
+          <p>
+            Experienced players often find that prestiging strategically — rather than waiting as
+            long as possible — is the fastest path to massive long-term wealth. Each reset is a
+            new opportunity to apply everything you have learned.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAME RULES -->
+  <section class="content-section">
+    <div class="section-inner">
+      <h2 class="section-title" style="text-align:center;">Game Rules</h2>
+      <p class="section-sub">How the game works under the hood</p>
+      <ul class="rules-list">
+        <li>Tap the money button to earn cash equal to your current tap value.</li>
+        <li>Each business generates income automatically every second while the game is open.</li>
+        <li>Businesses cost 15% more each time you purchase another copy of them.</li>
+        <li>Reaching 10, 25, 50, or 100 units of a business triggers a production milestone bonus.</li>
+        <li>Upgrades are permanent and persist through prestige resets.</li>
+        <li>Offline earnings are calculated at 50% of your online income rate, up to 8 hours.</li>
+        <li>The Boost reward doubles all income for 2 hours after watching a short advertisement.</li>
+        <li>Prestige becomes available once your all-time earnings reach the prestige threshold.</li>
+        <li>Each Prestige Point adds a permanent 5% bonus multiplier to all income sources.</li>
+        <li>Achievements reward you with cash bonuses when you hit specific milestones.</li>
+        <li>Game progress is saved to the cloud automatically every few minutes when signed in.</li>
+        <li>All in-game currency and earnings are fictional and have no real-world monetary value.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TIPS FOR PLAYERS -->
+  <section class="content-section biz-section">
+    <div class="section-inner">
+      <h2 class="section-title" style="text-align:center;">Tips for Players</h2>
+      <p class="section-sub">Advice from experienced tycoons to help you grow faster</p>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <div class="tip-num">Tip 01</div>
+          <h3>Buy Upgrades Early</h3>
+          <p>Check the Upgrades tab often. Upgrades provide multiplicative bonuses that compound with your business income. Buying an upgrade that doubles a business is almost always better than buying one more unit of that business.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">Tip 02</div>
+          <h3>Hit Milestone Quantities</h3>
+          <p>Owning 10, 25, 50, or 100 units of a business triggers special milestone multipliers. Try to push businesses to these thresholds — the jump in income is significant and worth the investment.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">Tip 03</div>
+          <h3>Prestige Early and Often</h3>
+          <p>You do not need to wait until you have maxed every business before prestiging. Each prestige gives you a permanent multiplier — the sooner you start stacking those multipliers, the faster you grow overall.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">Tip 04</div>
+          <h3>Use the Boost Reward</h3>
+          <p>The 2× income boost lasts a full 2 hours and is completely free. Activate it whenever you plan to spend time tapping actively — during a boost session you can earn as much as you would normally earn in four hours.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">Tip 05</div>
+          <h3>Log In Daily</h3>
+          <p>Daily login bonuses and streak rewards add up to significant income over time. Even if you only have a minute to spare, logging in to collect your offline earnings and claim your daily bonus is always worth it.</p>
+        </div>
+        <div class="tip-card">
+          <div class="tip-num">Tip 06</div>
+          <h3>Spread Your Investment</h3>
+          <p>Rather than maxing out a single business, spread your purchases across several businesses. Diversification gives you more passive income streams and unlocks more upgrades, which provides better long-term returns than focusing on one source.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-section">
     <div class="section-inner">
@@ -419,8 +651,10 @@
   <footer>
     <div class="footer-links">
       <a href="/play">Play Game</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
       <a href="/privacy">Privacy Policy</a>
-      <a href="mailto:privacy@taptycoon.com">Contact</a>
+      <a href="/terms">Terms of Service</a>
     </div>
     <p>&copy; 2026 Tap Tycoon. All rights reserved. Free to play idle browser game.</p>
   </footer>
