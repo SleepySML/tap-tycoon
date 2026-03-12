@@ -1,4 +1,4 @@
-# Tap Tycoon — Claude Code Instructions
+# Basement Tycoon — Claude Code Instructions
 
 ## Testing
 
@@ -26,7 +26,7 @@ await page.goto('https://basementtycoon.com/', { waitUntil: 'networkidle' });
 **Production URL:** https://basementtycoon.com/
 
 **Test credentials:**
-- Email: `scrolltest@taptycoon.com` / Password: `test123456`
+- Email: `scrolltest@basementtycoon.com` / Password: `test123456`
 
 ### Scroll test
 To verify scroll works on prod, create a temp `scroll-test.js`, run it, then delete it.

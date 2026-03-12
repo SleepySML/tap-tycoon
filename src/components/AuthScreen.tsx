@@ -99,7 +99,7 @@ function AuthScreen() {
         {/* Brand section */}
         <View style={styles.brand}>
           <Text style={styles.logo}>💰</Text>
-          <Text style={styles.appName}>Tap Tycoon</Text>
+          <Text style={styles.appName}>Basement Tycoon</Text>
           <Text style={styles.tagline}>
             Build your empire, one tap at a time
           </Text>

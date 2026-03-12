@@ -30,7 +30,7 @@ function SplashScreen() {
   return (
     <View style={splashStyles.container}>
       <Text style={splashStyles.logo}>💰</Text>
-      <Text style={splashStyles.title}>Tap Tycoon</Text>
+      <Text style={splashStyles.title}>Basement Tycoon</Text>
       <ActivityIndicator
         size="large"
         color="#ffd700"

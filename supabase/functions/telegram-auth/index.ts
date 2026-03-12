@@ -9,7 +9,7 @@
 //   - We verify the signature server-side — the bot token never leaves
 //     this Edge Function
 //   - Each Telegram user maps to a Supabase user via a stable fake email:
-//       tg_{telegram_id}@telegram.tap-tycoon.local
+//       tg_{telegram_id}@telegram.basement-tycoon.local
 //   - Their password is deterministic: HMAC-SHA256(TELEGRAM_USERS_SECRET, telegram_id)
 //     This means the same user always gets the same password without us
 //     storing it anywhere, and it cannot be guessed without the secret
@@ -134,7 +134,7 @@ interface TelegramUser {
 async function getOrCreateSession(
   tgUser: TelegramUser,
 ): Promise<{ access_token: string; refresh_token: string }> {
-  const fakeEmail = `tg_${tgUser.id}@telegram.tap-tycoon.local`;
+  const fakeEmail = `tg_${tgUser.id}@telegram.basement-tycoon.local`;
   const password = await derivePassword(tgUser.id);
 
   const displayName = [tgUser.first_name, tgUser.last_name].filter(Boolean).join(' ');
