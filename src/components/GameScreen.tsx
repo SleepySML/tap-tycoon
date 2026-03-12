@@ -184,21 +184,24 @@ export default function GameScreen() {
   }, [state.activateBoost]);
 
   const handleReset = useCallback(() => {
-    Alert.alert(
-      'Reset Game?',
-      'This will delete ALL progress. This cannot be undone!',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Reset',
-          style: 'destructive',
-          onPress: () => {
-            state.resetAll();
-            if (userId) saveToCloud(userId);
-          },
-        },
-      ],
-    );
+    const doReset = () => {
+      state.resetAll();
+      if (userId) saveToCloud(userId);
+    };
+    if (Platform.OS === 'web') {
+      if (window.confirm('Reset Game?\n\nThis will delete ALL progress. This cannot be undone!')) {
+        doReset();
+      }
+    } else {
+      Alert.alert(
+        'Reset Game?',
+        'This will delete ALL progress. This cannot be undone!',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Reset', style: 'destructive', onPress: doReset },
+        ],
+      );
+    }
   }, [state.resetAll, userId]);
 
   // ---- Render helpers ----
