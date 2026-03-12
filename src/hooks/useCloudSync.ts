@@ -16,7 +16,7 @@
 //   - Database storage: 2K × 2KB = 4MB (of 500MB free) ✓
 // ============================================
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 import { supabase, isSupabaseConfigured } from '../config/supabase';
 import { useAuthStore, selectIsAuthenticated } from '../store/authStore';
@@ -54,7 +54,7 @@ function extractGameState(store: GameStore): GameState {
  * Save current game state to Supabase.
  * Also updates the leaderboard entry.
  */
-async function saveToCloud(userId: string): Promise<boolean> {
+export async function saveToCloud(userId: string): Promise<boolean> {
   try {
     const state = extractGameState(useGameStore.getState());
     const displayName =

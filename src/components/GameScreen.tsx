@@ -40,7 +40,7 @@ import * as Calc from '../utils/calculations';
 import { formatMoney, formatTime, formatNumber } from '../utils/format';
 import { useGameLoop } from '../hooks/useGameLoop';
 import { useAppState } from '../hooks/useAppState';
-import { useCloudSync } from '../hooks/useCloudSync';
+import { useCloudSync, saveToCloud } from '../hooks/useCloudSync';
 import { useAuthActions } from '../hooks/useAuth';
 
 import Header from './Header';
@@ -73,6 +73,7 @@ export default function GameScreen() {
   // ---- Store subscriptions ----
   const state = useGameStore();
   const displayName = useAuthStore(selectDisplayName);
+  const userId = useAuthStore((s) => s.user?.id ?? null);
 
   // ---- Auth actions ----
   const { signOut } = useAuthActions();
@@ -188,10 +189,17 @@ export default function GameScreen() {
       'This will delete ALL progress. This cannot be undone!',
       [
         { text: 'Cancel', style: 'cancel' },
-        { text: 'Reset', style: 'destructive', onPress: () => state.resetAll() },
+        {
+          text: 'Reset',
+          style: 'destructive',
+          onPress: () => {
+            state.resetAll();
+            if (userId) saveToCloud(userId);
+          },
+        },
       ],
     );
-  }, [state.resetAll]);
+  }, [state.resetAll, userId]);
 
   // ---- Render helpers ----
   const renderBusinessPanel = () => (

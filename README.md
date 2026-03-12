@@ -1,4 +1,4 @@
-# Tap Tycoon — React Native (Expo)
+# Basement Tycoon — React Native (Expo)
 
 Cross-platform idle tycoon game for **iOS, Android, and Web** from a single TypeScript codebase, with **Google + Email authentication** and **cloud save sync**.
 
