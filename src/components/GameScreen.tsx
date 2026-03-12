@@ -513,14 +513,14 @@ const styles = StyleSheet.create({
   },
   tabContentInner: {
     paddingHorizontal: Spacing.md,
-    paddingBottom: 90 + Spacing.xxxl, // 90px banner height + breathing room
+    paddingBottom: 50 + Spacing.xxxl, // 50px banner height + breathing room
   },
   bannerWrapper: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    height: 90,
+    height: 50,
     overflow: 'hidden',
     zIndex: 10,
   },

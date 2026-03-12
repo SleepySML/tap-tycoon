@@ -50,22 +50,17 @@ function BannerAd() {
     );
   }
 
-  // Real AdSense banner — wrapper keeps layout stable while AdSense fills
+  // Real AdSense banner — fixed 320×50 mobile banner (no data-ad-format = fixed size)
   return (
     <View style={styles.container}>
       <View style={styles.adWrapper}>
-        <div
-          ref={adRef}
-          style={{ width: '100%', height: 90, overflow: 'hidden' }}
-        >
-          <ins
-            className="adsbygoogle"
-            style={{ display: 'block', width: '100%', height: 90, maxHeight: 90, overflow: 'hidden' }}
-            data-ad-client={PUBLISHER_ID}
-            data-ad-slot={AD_SLOTS.banner}
-            data-ad-format="horizontal"
-          />
-        </div>
+        <ins
+          ref={adRef as React.RefObject<HTMLModElement>}
+          className="adsbygoogle"
+          style={{ display: 'inline-block', width: 320, height: 50 }}
+          data-ad-client={PUBLISHER_ID}
+          data-ad-slot={AD_SLOTS.banner}
+        />
       </View>
     </View>
   );
@@ -83,7 +78,7 @@ const styles = StyleSheet.create({
   },
   adWrapper: {
     width: '100%',
-    height: 90,
+    height: 50,
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
@@ -91,7 +86,7 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     width: '100%',
-    height: 60,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255,255,255,0.03)',
