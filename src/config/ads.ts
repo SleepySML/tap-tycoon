@@ -36,6 +36,7 @@ export const AD_SLOTS = {
   banner: '9201832743',
   rewarded: '9201832743',
   interstitial: '9201832743',
+  landing: '6074381616',
 } as const;
 
 // ---- Feature Flags ----
@@ -51,7 +52,6 @@ export function isAdsConfigured(): boolean {
   return (
     ADS_ENABLED &&
     isProduction &&
-    PUBLISHER_ID !== 'ca-pub-XXXXXXXXXXXXXXXX' &&
     PUBLISHER_ID.startsWith('ca-pub-')
   );
 }

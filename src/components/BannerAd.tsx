@@ -50,16 +50,18 @@ function BannerAd() {
     );
   }
 
-  // Real AdSense banner — fixed 320×50 mobile banner (no data-ad-format = fixed size)
+  // Real AdSense banner — responsive auto-format (landing slot)
   return (
     <View style={styles.container}>
       <View style={styles.adWrapper}>
         <ins
           ref={adRef as React.RefObject<HTMLModElement>}
           className="adsbygoogle"
-          style={{ display: 'inline-block', width: 320, height: 50 }}
+          style={{ display: 'block' }}
           data-ad-client={PUBLISHER_ID}
-          data-ad-slot={AD_SLOTS.banner}
+          data-ad-slot={AD_SLOTS.landing}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
         />
       </View>
     </View>
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
   },
   adWrapper: {
     width: '100%',
-    height: 50,
+    minHeight: 50,
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',
