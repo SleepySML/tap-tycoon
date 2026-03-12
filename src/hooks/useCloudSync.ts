@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Cloud Sync Hook
+// BASEMENT TYCOON — Cloud Sync Hook
 //
 // Syncs game state to/from Supabase for authenticated users.
 //

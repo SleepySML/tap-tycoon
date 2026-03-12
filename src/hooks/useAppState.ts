@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — App State Hook
+// BASEMENT TYCOON — App State Hook
 //
 // Handles app going to background/foreground.
 // On return from background, applies partial offline

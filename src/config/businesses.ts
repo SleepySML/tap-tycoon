@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Business Definitions
+// BASEMENT TYCOON — Business Definitions
 //
 // Each business has escalating cost and income,
 // creating a satisfying progression curve.

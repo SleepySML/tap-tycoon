@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Supabase Client
+// BASEMENT TYCOON — Supabase Client
 //
 // Decision: Supabase over Firebase/Auth0/custom:
 //   - 50K MAU free (unlimited email/Google auth)

@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Ad Configuration
+// BASEMENT TYCOON — Ad Configuration
 //
 // Centralized configuration for Google AdSense ads.
 //

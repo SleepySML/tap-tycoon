@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Upgrade & Prestige-Upgrade Definitions
+// BASEMENT TYCOON — Upgrade & Prestige-Upgrade Definitions
 // ============================================
 
 import { PrestigeUpgrade, Upgrade } from '../types';

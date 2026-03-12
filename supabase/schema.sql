@@ -1,5 +1,5 @@
 -- ============================================
--- TAP TYCOON — Database Schema
+-- BASEMENT TYCOON — Database Schema
 --
 -- Run this in your Supabase SQL Editor:
 --   Dashboard → SQL Editor → New Query → Paste → Run

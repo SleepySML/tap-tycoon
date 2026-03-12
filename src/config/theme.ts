@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Visual Theme Constants
+// BASEMENT TYCOON — Visual Theme Constants
 //
 // Single source of truth for all colors, spacing,
 // typography, and radii used across the app.

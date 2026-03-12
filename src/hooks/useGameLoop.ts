@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Game Loop Hook
+// BASEMENT TYCOON — Game Loop Hook
 //
 // Runs at ~10 ticks/sec (TICK_INTERVAL_MS).
 // Uses delta time so income is frame-rate independent.

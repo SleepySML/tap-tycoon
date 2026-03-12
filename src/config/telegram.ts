@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Telegram Mini App SDK
+// BASEMENT TYCOON — Telegram Mini App SDK
 //
 // Provides:
 //   - Type definitions for window.Telegram.WebApp

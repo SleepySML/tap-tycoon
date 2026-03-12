@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Telegram Auth Service
+// BASEMENT TYCOON — Telegram Auth Service
 //
 // Calls the Supabase Edge Function `telegram-auth`
 // to exchange Telegram's initData for a Supabase session.

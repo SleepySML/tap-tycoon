@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Auth Hook
+// BASEMENT TYCOON — Auth Hook
 //
 // Provides all authentication operations:
 //   - Initialize session (restore from storage)

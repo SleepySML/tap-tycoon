@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Telegram Auth Edge Function
+// BASEMENT TYCOON — Telegram Auth Edge Function
 //
 // Validates Telegram Mini App initData and issues
 // a Supabase session for the Telegram user.

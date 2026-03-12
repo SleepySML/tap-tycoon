@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Tap Tycoon",
-    "slug": "tap-tycoon",
+    "name": "Basement Tycoon",
+    "slug": "basement-tycoon",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -13,13 +13,13 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.taptycoon.game"
+      "bundleIdentifier": "com.basementtycoon.game"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#0a0a1a"
       },
-      "package": "com.taptycoon.game"
+      "package": "com.basementtycoon.game"
     },
     "web": {
       "favicon": "./assets/favicon.png",

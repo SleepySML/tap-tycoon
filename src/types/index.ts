@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Shared Type Definitions
+// BASEMENT TYCOON — Shared Type Definitions
 // ============================================
 
 /** A business the player can own and level up. */

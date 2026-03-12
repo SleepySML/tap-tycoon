@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Zustand Game Store
+// BASEMENT TYCOON — Zustand Game Store
 //
 // Architecture decisions:
 //   - Zustand (not Context): selector-based subscriptions prevent
@@ -279,7 +279,7 @@ export const useGameStore = create<GameStore>()(
       },
     }),
     {
-      name: 'tap-tycoon-save',
+      name: 'basement-tycoon-save',
       storage: createJSONStorage(() => AsyncStorage),
       // Only persist data fields, not action functions
       partialize: (state) => ({

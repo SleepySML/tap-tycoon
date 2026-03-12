@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Game Balance Constants
+// BASEMENT TYCOON — Game Balance Constants
 //
 // All economic tuning knobs in one place.
 // Adjust these to change game feel and pacing.

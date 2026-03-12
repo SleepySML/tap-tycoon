@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Ad Service
+// BASEMENT TYCOON — Ad Service
 //
 // Manages Google AdSense ad lifecycle on web.
 // All functions are no-ops on native platforms.

@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Number & Money Formatting
+// BASEMENT TYCOON — Number & Money Formatting
 //
 // Pure functions — no side effects, easily testable.
 // ============================================

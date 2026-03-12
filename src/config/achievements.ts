@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Achievement & Daily Reward Definitions
+// BASEMENT TYCOON — Achievement & Daily Reward Definitions
 // ============================================
 
 import { Achievement, DailyReward } from '../types';

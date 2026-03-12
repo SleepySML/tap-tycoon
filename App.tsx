@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — App Entry Point
+// BASEMENT TYCOON — App Entry Point
 //
 // Responsibilities:
 //   1. SafeAreaProvider for consistent insets

@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Auth Store (Zustand)
+// BASEMENT TYCOON — Auth Store (Zustand)
 //
 // Separate store from game state because:
 //   - Auth state changes rarely (sign in/out) vs game

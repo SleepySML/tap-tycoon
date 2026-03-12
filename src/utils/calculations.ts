@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Pure Game-Math Functions
+// BASEMENT TYCOON — Pure Game-Math Functions
 //
 // Every calculation the game needs, as pure functions.
 // Takes state in, returns numbers out. Zero side effects.

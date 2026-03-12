@@ -1,5 +1,5 @@
 // ============================================
-// TAP TYCOON — Local Auth Service
+// BASEMENT TYCOON — Local Auth Service
 //
 // AsyncStorage-backed authentication for development
 // and demo mode (when Supabase is not configured).
@@ -11,8 +11,8 @@
 //   - Pre-seeded test accounts
 //
 // Storage keys:
-//   tap-tycoon-users   → Record<email, UserRecord>
-//   tap-tycoon-session  → { userId, email } | null
+//   basement-tycoon-users   → Record<email, UserRecord>
+//   basement-tycoon-session  → { userId, email } | null
 //
 // When Supabase IS configured, this service is unused.
 // The useAuth hook routes to Supabase instead.
@@ -51,8 +51,8 @@ export interface LocalSession {
 
 // ---- Constants ----
 
-const USERS_KEY = 'tap-tycoon-users';
-const SESSION_KEY = 'tap-tycoon-session';
+const USERS_KEY = 'basement-tycoon-users';
+const SESSION_KEY = 'basement-tycoon-session';
 
 /** Pre-seeded test accounts (created on first initialize). */
 const TEST_ACCOUNTS = [
