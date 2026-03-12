@@ -76,6 +76,8 @@ export default memo(BannerAd);
 const styles = StyleSheet.create({
   container: {
     width: '100%',
+    height: 90,
+    overflow: 'hidden',
     alignItems: 'center',
     backgroundColor: Colors.bgPrimary,
     borderTopWidth: 1,

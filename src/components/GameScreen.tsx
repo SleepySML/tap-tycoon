@@ -550,14 +550,14 @@ const styles = StyleSheet.create({
   // Boost button
   boostBtnRow: {
     alignItems: 'center',
-    paddingVertical: Spacing.xs,
+    paddingVertical: 2,
   },
   boostBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.sm,
     paddingHorizontal: Spacing.lg,
-    paddingVertical: Spacing.sm,
+    paddingVertical: Spacing.xs,
     backgroundColor: 'rgba(255,215,0,0.1)',
     borderRadius: Radii.lg,
     borderWidth: 1,
