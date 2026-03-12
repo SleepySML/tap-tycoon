@@ -41,4 +41,8 @@ export const GAME = {
 
   /** Max number of business levels to compute for "max" buy. Safety cap. */
   MAX_BUY_CALC: 10_000,
+
+  /** Income is calculated per-second internally but balanced as per-minute.
+   *  Divide base income by this factor so 1 min of play = same total as before. */
+  INCOME_RATE_DIVISOR: 60,
 } as const;

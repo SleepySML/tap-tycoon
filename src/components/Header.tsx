@@ -34,7 +34,7 @@ const IncomePill = memo(function IncomePill() {
   return (
     <View style={styles.pill}>
       <Text style={styles.pillIcon}>⚡</Text>
-      <Text style={styles.pillText}>{formatMoney(ips)}/s</Text>
+      <Text style={styles.pillText}>{formatMoney(ips * 60)}/min</Text>
     </View>
   );
 });

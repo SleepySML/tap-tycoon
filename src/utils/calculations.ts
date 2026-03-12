@@ -107,7 +107,7 @@ export function calculateBusinessIncome(
   income *= getPrestigeMultiplier(state.prestigePoints);
   income *= getBoostMultiplier(state.boostEndTime);
 
-  return income;
+  return income / GAME.INCOME_RATE_DIVISOR;
 }
 
 /** Total income per second across all businesses. */

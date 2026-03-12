@@ -50,7 +50,7 @@ function BusinessCard({
           </View>
         </View>
         <Text style={styles.income}>
-          {level > 0 ? `${formatMoney(income)}/s` : business.description}
+          {level > 0 ? `${formatMoney(income * 60)}/min` : business.description}
         </Text>
       </View>
 
