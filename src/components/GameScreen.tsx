@@ -335,8 +335,10 @@ export default function GameScreen() {
           {activeTab === 'achievements' && renderAchievementPanel()}
         </ScrollView>
 
-        {/* Banner Ad at bottom of game area */}
-        <BannerAd />
+        {/* Banner Ad — absolutely positioned so AdSense JS can't push it into flex flow */}
+        <View style={styles.bannerWrapper}>
+          <BannerAd />
+        </View>
       </View>
 
       {/* Achievement Toast */}
@@ -511,7 +513,16 @@ const styles = StyleSheet.create({
   },
   tabContentInner: {
     paddingHorizontal: Spacing.md,
-    paddingBottom: Spacing.xxxl,
+    paddingBottom: 90 + Spacing.xxxl, // 90px banner height + breathing room
+  },
+  bannerWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 90,
+    overflow: 'hidden',
+    zIndex: 10,
   },
   panelHeader: {
     flexDirection: 'row',
