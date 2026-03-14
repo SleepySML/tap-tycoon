@@ -71,10 +71,8 @@ export default function GameScreen() {
   const [showRewardedAd, setShowRewardedAd] = useState(false);
   const [showTelegramBoost, setShowTelegramBoost] = useState(false);
   const isInTelegram = isTelegramMiniApp();
-  // openInvoice requires Telegram ≥ 6.1 (released 2022). If unavailable, disable Stars.
-  const canUseStars = isInTelegram && Boolean(
-    typeof window !== 'undefined' && window.Telegram?.WebApp?.openInvoice,
-  );
+  // Show Stars button for all Telegram users — openInvoice check is handled inside the modal
+  const canUseStars = isInTelegram;
   const [achievementToast, setAchievementToast] = useState<string | null>(null);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout>>();
 

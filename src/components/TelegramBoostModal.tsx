@@ -40,12 +40,6 @@ function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostM
   const [error, setError] = useState<string | null>(null);
 
   const handlePay = useCallback(async () => {
-    const tg = window.Telegram?.WebApp;
-    if (!tg?.openInvoice) {
-      setError('Stars payments are not available in this version of Telegram. Please update the app.');
-      return;
-    }
-
     setLoading(true);
     setError(null);
 
@@ -63,6 +57,11 @@ function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostM
 
       if (!resp.ok || !data.invoice_url) {
         throw new Error(data.error ?? 'Failed to create invoice');
+      }
+
+      const tg = window.Telegram?.WebApp;
+      if (!tg?.openInvoice) {
+        throw new Error('Stars payments are not supported in this Telegram client. Please use the Telegram mobile app.');
       }
 
       // Open the Telegram Stars payment sheet
