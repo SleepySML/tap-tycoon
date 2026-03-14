@@ -20,6 +20,22 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+  <!-- Telegram: redirect to game immediately, skip landing page.
+       Telegram injects tgWebAppData into the URL hash when opening a Mini App. -->
+  <script>
+    (function () {
+      var hash = window.location.hash || '';
+      var search = window.location.search || '';
+      var isTelegram =
+        hash.indexOf('tgWebAppData') !== -1 ||
+        search.indexOf('tgWebAppData') !== -1 ||
+        (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData);
+      if (isTelegram) {
+        window.location.replace('/play');
+      }
+    })();
+  </script>
+
   <!-- Google AdSense -->
   <meta name="google-adsense-account" content="ca-pub-7610075308812167" />
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7610075308812167" crossorigin="anonymous"></script>
