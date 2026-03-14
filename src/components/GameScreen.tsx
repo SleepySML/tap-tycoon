@@ -71,6 +71,10 @@ export default function GameScreen() {
   const [showRewardedAd, setShowRewardedAd] = useState(false);
   const [showTelegramBoost, setShowTelegramBoost] = useState(false);
   const isInTelegram = isTelegramMiniApp();
+  // openInvoice requires Telegram ≥ 6.1 (released 2022). If unavailable, disable Stars.
+  const canUseStars = isInTelegram && Boolean(
+    typeof window !== 'undefined' && window.Telegram?.WebApp?.openInvoice,
+  );
   const [achievementToast, setAchievementToast] = useState<string | null>(null);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -179,13 +183,14 @@ export default function GameScreen() {
   }, [state.claimDaily]);
 
   const handleBoost = useCallback(() => {
-    if (isInTelegram) {
+    if (canUseStars) {
       // Telegram Rules §1: no ads in Mini Apps — use Stars payment instead
       setShowTelegramBoost(true);
-    } else {
+    } else if (!isInTelegram) {
       setShowRewardedAd(true);
     }
-  }, [isInTelegram]);
+    // isInTelegram but no openInvoice → button is disabled, no action
+  }, [canUseStars, isInTelegram]);
 
   const handleRewardEarned = useCallback(() => {
     state.activateBoost();
@@ -332,12 +337,20 @@ export default function GameScreen() {
 
         {/* Boost Button — Ad-based on web, Stars-based in Telegram */}
         <View style={styles.boostBtnRow}>
-          <Pressable style={styles.boostBtn} onPress={handleBoost}>
+          <Pressable
+            style={[styles.boostBtn, isInTelegram && !canUseStars && styles.boostBtnDisabled]}
+            onPress={handleBoost}
+            disabled={isInTelegram && !canUseStars}
+          >
             <View style={styles.adIcon}>
-              <Text style={styles.adIconText}>{isInTelegram ? '⭐' : '▶'}</Text>
+              <Text style={styles.adIconText}>{canUseStars ? '⭐' : '▶'}</Text>
             </View>
             <Text style={styles.boostBtnText}>
-              {isInTelegram ? '2× Boost for ⭐ Stars' : 'Watch Ad for 2× Boost'}
+              {canUseStars
+                ? '2× Boost for ⭐ Stars'
+                : isInTelegram
+                  ? 'Update Telegram for Stars Boost'
+                  : 'Watch Ad for 2× Boost'}
             </Text>
           </Pressable>
         </View>
@@ -601,6 +614,9 @@ const styles = StyleSheet.create({
     borderRadius: Radii.lg,
     borderWidth: 1,
     borderColor: 'rgba(255,215,0,0.3)',
+  },
+  boostBtnDisabled: {
+    opacity: 0.4,
   },
   adIcon: {
     width: 20,
