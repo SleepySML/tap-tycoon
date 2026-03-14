@@ -63,7 +63,7 @@ export interface TelegramWebApp {
 }
 
 /** Price of the 2× Boost in Telegram Stars (XTR). */
-export const STARS_BOOST_PRICE = 50;
+export const STARS_BOOST_PRICE = 2;
 
 declare global {
   interface Window {

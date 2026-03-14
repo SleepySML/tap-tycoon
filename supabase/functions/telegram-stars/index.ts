@@ -27,7 +27,7 @@ const TELEGRAM_API = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}`;
 
 // Price in Stars (XTR). 1 Star ≈ $0.013 USD at current rate.
 // 50 Stars ≈ $0.65 — fair price for a 2-hour 2× boost.
-const BOOST_STARS_PRICE = 50;
+const BOOST_STARS_PRICE = 2;
 
 Deno.serve(async (req: Request) => {
   if (req.method === 'OPTIONS') {
