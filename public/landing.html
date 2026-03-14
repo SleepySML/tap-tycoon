@@ -31,7 +31,8 @@
         search.indexOf('tgWebAppData') !== -1 ||
         (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData);
       if (isTelegram) {
-        window.location.replace('/play');
+        // Preserve hash so Telegram's #tgWebAppData reaches /play
+        window.location.replace('/play' + window.location.hash);
       }
     })();
   </script>

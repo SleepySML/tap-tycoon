@@ -58,7 +58,12 @@ export interface TelegramWebApp {
   close: () => void;
   setHeaderColor: (color: string) => void;
   setBackgroundColor: (color: string) => void;
+  /** Open a Telegram Stars payment invoice. Status: 'paid' | 'cancelled' | 'failed' | 'pending' */
+  openInvoice: (url: string, callback: (status: string) => void) => void;
 }
+
+/** Price of the 2× Boost in Telegram Stars (XTR). */
+export const STARS_BOOST_PRICE = 50;
 
 declare global {
   interface Window {
@@ -71,14 +76,22 @@ declare global {
 /** True if the app is running inside a Telegram Mini App. */
 export function isTelegramMiniApp(): boolean {
   if (typeof window === 'undefined') return false;
-  // initData is a non-empty string only when opened inside Telegram
-  return Boolean(window.Telegram?.WebApp?.initData);
+  // Primary: Telegram SDK injects initData when opened as Mini App
+  if (window.Telegram?.WebApp?.initData) return true;
+  // Fallback: Telegram appends #tgWebAppData to the URL hash
+  const hash = window.location.hash || '';
+  const search = window.location.search || '';
+  return hash.includes('tgWebAppData') || search.includes('tgWebAppData');
 }
 
 /** Returns the raw initData string for server-side HMAC verification. */
 export function getTelegramInitData(): string | null {
   if (!isTelegramMiniApp()) return null;
-  return window.Telegram!.WebApp!.initData;
+  // Prefer SDK-provided initData; fall back to extracting from URL hash
+  if (window.Telegram?.WebApp?.initData) return window.Telegram.WebApp.initData;
+  const hash = window.location.hash.slice(1); // strip leading #
+  const params = new URLSearchParams(hash);
+  return params.get('tgWebAppData');
 }
 
 /**
