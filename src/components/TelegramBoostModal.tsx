@@ -39,7 +39,20 @@ function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostM
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Check if openInvoice is available before even trying to pay
+  const supportsStars = Boolean(window.Telegram?.WebApp?.openInvoice);
+
   const handlePay = useCallback(async () => {
+    // Guard: openInvoice not available (Telegram Desktop / Web)
+    const tg = window.Telegram?.WebApp;
+    if (!tg?.openInvoice) {
+      setError(
+        'Telegram Stars payments only work in the Telegram mobile app (iOS or Android).\n\n' +
+        'Please open this game on your phone via Telegram to use Stars.',
+      );
+      return;
+    }
+
     setLoading(true);
     setError(null);
 
@@ -57,11 +70,6 @@ function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostM
 
       if (!resp.ok || !data.invoice_url) {
         throw new Error(data.error ?? 'Failed to create invoice');
-      }
-
-      const tg = window.Telegram?.WebApp;
-      if (!tg?.openInvoice) {
-        throw new Error('Stars payments are not supported in this Telegram client. Please use the Telegram mobile app.');
       }
 
       // Open the Telegram Stars payment sheet
@@ -120,6 +128,17 @@ function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostM
             </View>
           </View>
 
+          {/* Desktop warning — shown immediately if openInvoice is not available */}
+          {!supportsStars && (
+            <View style={styles.warningBox}>
+              <Text style={styles.warningTitle}>📱 Mobile only</Text>
+              <Text style={styles.warningText}>
+                Telegram Stars payments are only available in the Telegram mobile app (iOS / Android).
+                Open this game on your phone to use Stars.
+              </Text>
+            </View>
+          )}
+
           {/* Error message */}
           {error && (
             <View style={styles.errorBox}>
@@ -129,9 +148,9 @@ function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostM
 
           {/* Pay button */}
           <Pressable
-            style={[styles.payBtn, loading && styles.payBtnDisabled]}
+            style={[styles.payBtn, (loading || !supportsStars) && styles.payBtnDisabled]}
             onPress={handlePay}
-            disabled={loading}
+            disabled={loading || !supportsStars}
           >
             {loading ? (
               <ActivityIndicator color="#fff" size="small" />
@@ -233,6 +252,28 @@ const styles = StyleSheet.create({
     fontSize: FontSizes.md,
     color: Colors.gold,
     fontWeight: FontWeights.bold,
+  },
+  warningBox: {
+    width: '100%',
+    backgroundColor: 'rgba(251,191,36,0.12)',
+    borderRadius: Radii.sm,
+    padding: Spacing.md,
+    marginBottom: Spacing.md,
+    borderWidth: 1,
+    borderColor: 'rgba(251,191,36,0.3)',
+  },
+  warningTitle: {
+    fontSize: FontSizes.md,
+    fontWeight: FontWeights.bold,
+    color: '#fbbf24',
+    textAlign: 'center',
+    marginBottom: Spacing.xs,
+  },
+  warningText: {
+    fontSize: FontSizes.sm,
+    color: '#fbbf24',
+    textAlign: 'center',
+    opacity: 0.85,
   },
   errorBox: {
     width: '100%',
