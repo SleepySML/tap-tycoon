@@ -14,7 +14,7 @@
 //   6. On status='cancelled'/'failed' → error shown, user can retry
 // ============================================
 
-import React, { memo, useState, useCallback } from 'react';
+import React, { memo, useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
@@ -38,17 +38,36 @@ export interface TelegramBoostModalProps {
 function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostModalProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // null = still checking (SDK may not be ready yet), true/false = resolved
+  const [supportsStars, setSupportsStars] = useState<boolean | null>(null);
 
-  // Check if openInvoice is available before even trying to pay
-  const supportsStars = Boolean(window.Telegram?.WebApp?.openInvoice);
+  // Check openInvoice availability after mount — Telegram SDK may load async
+  useEffect(() => {
+    if (!visible) return;
+    // Give SDK up to 2s to initialize, then decide
+    let resolved = false;
+    const check = () => {
+      const available = Boolean(window.Telegram?.WebApp?.openInvoice);
+      if (available || resolved) {
+        resolved = true;
+        setSupportsStars(available);
+        return true;
+      }
+      return false;
+    };
+    if (check()) return;
+    const interval = setInterval(() => { if (check()) clearInterval(interval); }, 200);
+    const timeout = setTimeout(() => { clearInterval(interval); resolved = true; setSupportsStars(false); }, 2000);
+    return () => { clearInterval(interval); clearTimeout(timeout); };
+  }, [visible]);
 
   const handlePay = useCallback(async () => {
     // Guard: openInvoice not available (Telegram Desktop / Web)
     const tg = window.Telegram?.WebApp;
     if (!tg?.openInvoice) {
       setError(
-        'Telegram Stars payments only work in the Telegram mobile app (iOS or Android).\n\n' +
-        'Please open this game on your phone via Telegram to use Stars.',
+        'Stars payments are not available in this Telegram client.\n' +
+        'Please open the game in the Telegram mobile app (iOS or Android).',
       );
       return;
     }
@@ -128,8 +147,8 @@ function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostM
             </View>
           </View>
 
-          {/* Desktop warning — shown immediately if openInvoice is not available */}
-          {!supportsStars && (
+          {/* Desktop warning — shown only after SDK check resolves as false */}
+          {supportsStars === false && (
             <View style={styles.warningBox}>
               <Text style={styles.warningTitle}>📱 Mobile only</Text>
               <Text style={styles.warningText}>
@@ -148,11 +167,11 @@ function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostM
 
           {/* Pay button */}
           <Pressable
-            style={[styles.payBtn, (loading || !supportsStars) && styles.payBtnDisabled]}
+            style={[styles.payBtn, (loading || supportsStars === false) && styles.payBtnDisabled]}
             onPress={handlePay}
-            disabled={loading || !supportsStars}
+            disabled={loading || supportsStars === false}
           >
-            {loading ? (
+            {loading || supportsStars === null ? (
               <ActivityIndicator color="#fff" size="small" />
             ) : (
               <Text style={styles.payBtnText}>Pay ⭐ {STARS_BOOST_PRICE} Stars</Text>
