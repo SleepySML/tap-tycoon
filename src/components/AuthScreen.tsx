@@ -32,7 +32,7 @@ import { useAuthStore, selectIsLoading } from '../store/authStore';
 import { useAuthActions } from '../hooks/useAuth';
 import { isTelegramMiniApp } from '../config/telegram';
 
-const TELEGRAM_MINI_APP_URL = 'https://t.me/tap_tacoon_bot/Businessman';
+const TELEGRAM_MINI_APP_URL = 'https://t.me/BasementTycoonBot/play';
 
 function AuthScreen() {
   const isLoading = useAuthStore(selectIsLoading);
