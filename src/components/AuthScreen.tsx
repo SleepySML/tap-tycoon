@@ -135,8 +135,9 @@ function AuthScreen() {
 
           {/* Telegram Button:
               - Inside Telegram Mini App → sign in with Telegram identity
-              - Outside Telegram → redirect to the Mini App */}
-          <Pressable
+              - Outside Telegram on web → redirect to the Mini App
+              - Outside Telegram on mobile → hidden */}
+          {(inTelegram || Platform.OS === 'web') && <Pressable
             style={[styles.telegramBtn, isLoading && styles.btnDisabled]}
             onPress={inTelegram ? handleSignInWithTelegram : handleOpenInTelegram}
             disabled={isLoading}
@@ -151,7 +152,7 @@ function AuthScreen() {
                 </Text>
               </>
             )}
-          </Pressable>
+          </Pressable>}
 
           {/* Divider */}
           <View style={styles.divider}>
