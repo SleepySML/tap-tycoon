@@ -53,6 +53,8 @@ import PrestigePanel from './PrestigePanel';
 import AchievementCard from './AchievementCard';
 import BannerAd from './BannerAd';
 import RewardedAdOverlay from './RewardedAdOverlay';
+import TelegramBoostModal from './TelegramBoostModal';
+import { isTelegramMiniApp } from '../config/telegram';
 
 // ---- Buy amount options ----
 const BUY_AMOUNTS: BuyAmount[] = [1, 10, 25, 100, 'max'];
@@ -67,6 +69,8 @@ export default function GameScreen() {
   const [showSettings, setShowSettings] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [showRewardedAd, setShowRewardedAd] = useState(false);
+  const [showTelegramBoost, setShowTelegramBoost] = useState(false);
+  const isInTelegram = isTelegramMiniApp();
   const [achievementToast, setAchievementToast] = useState<string | null>(null);
   const toastTimerRef = useRef<ReturnType<typeof setTimeout>>();
 
@@ -175,9 +179,13 @@ export default function GameScreen() {
   }, [state.claimDaily]);
 
   const handleBoost = useCallback(() => {
-    // Open the rewarded ad overlay (real ad + timer)
-    setShowRewardedAd(true);
-  }, []);
+    if (isInTelegram) {
+      // Telegram Rules §1: no ads in Mini Apps — use Stars payment instead
+      setShowTelegramBoost(true);
+    } else {
+      setShowRewardedAd(true);
+    }
+  }, [isInTelegram]);
 
   const handleRewardEarned = useCallback(() => {
     state.activateBoost();
@@ -322,13 +330,15 @@ export default function GameScreen() {
 
         <TapButton />
 
-        {/* Watch Ad Boost Button */}
+        {/* Boost Button — Ad-based on web, Stars-based in Telegram */}
         <View style={styles.boostBtnRow}>
           <Pressable style={styles.boostBtn} onPress={handleBoost}>
             <View style={styles.adIcon}>
-              <Text style={styles.adIconText}>▶</Text>
+              <Text style={styles.adIconText}>{isInTelegram ? '⭐' : '▶'}</Text>
             </View>
-            <Text style={styles.boostBtnText}>Watch Ad for 2× Boost</Text>
+            <Text style={styles.boostBtnText}>
+              {isInTelegram ? '2× Boost for ⭐ Stars' : 'Watch Ad for 2× Boost'}
+            </Text>
           </Pressable>
         </View>
 
@@ -490,11 +500,18 @@ export default function GameScreen() {
         </View>
       </Modal>
 
-      {/* Rewarded Ad Overlay */}
+      {/* Rewarded Ad Overlay (web only) */}
       <RewardedAdOverlay
         visible={showRewardedAd}
         onRewardEarned={handleRewardEarned}
         onClose={() => setShowRewardedAd(false)}
+      />
+
+      {/* Telegram Stars Boost Modal (Telegram Mini App only) */}
+      <TelegramBoostModal
+        visible={showTelegramBoost}
+        onRewardEarned={handleRewardEarned}
+        onClose={() => setShowTelegramBoost(false)}
       />
 
     </SafeAreaView>

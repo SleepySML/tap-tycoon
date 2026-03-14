@@ -16,11 +16,14 @@
 
 import React, { memo, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
-import { Colors, FontSizes, Spacing } from '../config/theme';
+import { Colors, FontSizes } from '../config/theme';
 import { PUBLISHER_ID, AD_SLOTS, ADS_ENABLED, isAdsConfigured } from '../config/ads';
 import { pushAd, ensureAdSenseScript } from '../services/ads';
+import { isTelegramMiniApp } from '../config/telegram';
 
 function BannerAd() {
+  // Telegram Mini App Rules §1: no ads on custom URL pages.
+  if (isTelegramMiniApp()) return null;
   const adRef = useRef<HTMLDivElement | null>(null);
   const pushed = useRef(false);
 
