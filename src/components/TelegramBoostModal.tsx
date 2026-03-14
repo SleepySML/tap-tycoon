@@ -25,7 +25,7 @@ import {
 } from 'react-native';
 import { Colors, Spacing, FontSizes, FontWeights, Radii } from '../config/theme';
 import { STARS_BOOST_PRICE } from '../config/telegram';
-import { SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from '../config/supabase';
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from '../config/supabase';
 
 const EDGE_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/telegram-stars`;
 
@@ -55,7 +55,7 @@ function TelegramBoostModal({ visible, onRewardEarned, onClose }: TelegramBoostM
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
         },
       });
 

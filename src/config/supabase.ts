@@ -30,6 +30,9 @@ import { createClient } from '@supabase/supabase-js';
 // - Publishable key: sb_publishable_... (replaces legacy anon key)
 export const SUPABASE_URL = 'https://bvaxjrydahaeaxvlnbct.supabase.co';
 export const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_BVOg7XD9KtK0w3ig9K-pYQ_ECcdyy08';
+// Legacy anon JWT key — required for calling Edge Functions via raw fetch.
+// The new sb_publishable key is not accepted as a Bearer token by Edge Functions.
+export const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2YXhqcnlkYWhhZWF4dmxuYmN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMDQ1NDYsImV4cCI6MjA4NzY4MDU0Nn0.HFNjpaK8Bt-V-X7xwSR0ZnD4t5n-m7b2GB2ffTkb2l8';
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {

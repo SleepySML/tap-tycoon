@@ -17,7 +17,7 @@
 //   5. Client calls supabase.auth.setSession() with returned tokens
 // ============================================
 
-import { supabase, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from '../config/supabase';
+import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from '../config/supabase';
 
 const EDGE_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/telegram-auth`;
 
@@ -38,8 +38,7 @@ export async function signInWithTelegramInitData(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      // Edge Functions require the anon/publishable key as authorization
-      'Authorization': `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
     },
     body: JSON.stringify({ type: 'mini_app', initData }),
   });
